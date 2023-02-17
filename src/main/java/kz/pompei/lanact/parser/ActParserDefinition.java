@@ -10,6 +10,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
+import kz.pompei.lanact.gen.language.ActParser;
+import kz.pompei.lanact.gen.language.ActTokenTypes;
 import kz.pompei.lanact.lan.ActFile;
 import kz.pompei.lanact.lan.ActLanguage;
 import kz.pompei.lanact.lexer.ActLexerAdapter;
@@ -26,8 +28,7 @@ public class ActParserDefinition implements ParserDefinition {
 
   @Override
   public @NotNull PsiParser createParser(Project project) {
-    // TODO pompei доделать этот метод
-    throw new RuntimeException("581wdGQyG3 :: Not impl yet");
+    return new ActParser();
   }
 
   @Override
@@ -48,8 +49,7 @@ public class ActParserDefinition implements ParserDefinition {
 
   @Override
   public @NotNull PsiElement createElement(ASTNode node) {
-    // TODO pompei доделать этот метод
-    throw new RuntimeException("17.02.2023 19:40 Not impl yet ActParserDefinition.createElement()");
+    return ActTokenTypes.Factory.createElement(node);
   }
 
   @Override

@@ -13,11 +13,13 @@
   <depends>com.intellij.modules.platform</depends>
 
   <extensions defaultExtensionNs="com.intellij">
-    <fileType
-      name="Act File"
-      implementationClass="kz.pompei.lanact.lan.ActFileType"
-      fieldName="INSTANCE"
-      language="Act"
-      extensions="act"/>
+    <fileType name="Act File"
+              implementationClass="kz.pompei.lanact.lan.ActFileType"
+              fieldName="INSTANCE"
+              language="Act"
+              extensions="act"/>
+
+    <lang.parserDefinition language="Act"
+                           implementationClass="kz.pompei.lanact.parser.ActParserDefinition"/>
   </extensions>
 </idea-plugin>
