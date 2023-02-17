@@ -1,4 +1,4 @@
-package kz.pompei.lanact.lanact;
+package kz.pompei.lanact.lan;
 
 import com.intellij.openapi.util.IconLoader;
 import javax.swing.Icon;

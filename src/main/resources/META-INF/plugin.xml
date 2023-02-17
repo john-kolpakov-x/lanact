@@ -15,7 +15,7 @@
   <extensions defaultExtensionNs="com.intellij">
     <fileType
       name="Act File"
-      implementationClass="kz.pompei.lanact.lanact.ActFileType"
+      implementationClass="kz.pompei.lanact.lan.ActFileType"
       fieldName="INSTANCE"
       language="Act"
       extensions="act"/>
