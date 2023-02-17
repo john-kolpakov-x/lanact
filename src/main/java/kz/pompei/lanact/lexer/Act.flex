@@ -3,7 +3,7 @@ package kz.pompei.lanact.gen.language;
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
 import kz.pompei.lanact.lexer.ActElementStr;
-import kz.pompei.lanact.lexer.ActLexerTypes;
+import kz.pompei.lanact.gen.language.ActTokenTypes;
 import com.intellij.psi.TokenType;
 
 %%
@@ -48,110 +48,110 @@ COMMENT_CONTENT       = ( [^*] | \*+ [^/*] )*
 
 %%
 
-<YYINITIAL> {WHITE_SPACE}                                   { yybegin(YYINITIAL); return ActLexerTypes.WHITE_SPACE; }
+<YYINITIAL> {WHITE_SPACE}                                   { yybegin(YYINITIAL); return ActTokenTypes.WHITE_SPACE; }
 
-<YYINITIAL> "import"                                        { yybegin(YYINITIAL); return ActLexerTypes.KEYWORD_STARTER; }
-<YYINITIAL> "fun"                                           { yybegin(YYINITIAL); return ActLexerTypes.KEYWORD_STARTER; }
-<YYINITIAL> "operator"                                      { yybegin(YYINITIAL); return ActLexerTypes.KEYWORD_STARTER; }
-<YYINITIAL> "class"                                         { yybegin(YYINITIAL); return ActLexerTypes.KEYWORD_STARTER; }
-<YYINITIAL> "interface"                                     { yybegin(YYINITIAL); return ActLexerTypes.KEYWORD_STARTER; }
-<YYINITIAL> "let"                                           { yybegin(YYINITIAL); return ActLexerTypes.KEYWORD_STARTER; }
-<YYINITIAL> "mul"                                           { yybegin(YYINITIAL); return ActLexerTypes.KEYWORD_STARTER; }
-<YYINITIAL> "ret"                                           { yybegin(YYINITIAL); return ActLexerTypes.KEYWORD_STARTER; }
+<YYINITIAL> "import"                                        { yybegin(YYINITIAL); return ActTokenTypes.KEYWORD_STARTER; }
+<YYINITIAL> "fun"                                           { yybegin(YYINITIAL); return ActTokenTypes.KEYWORD_STARTER; }
+<YYINITIAL> "operator"                                      { yybegin(YYINITIAL); return ActTokenTypes.KEYWORD_STARTER; }
+<YYINITIAL> "class"                                         { yybegin(YYINITIAL); return ActTokenTypes.KEYWORD_STARTER; }
+<YYINITIAL> "interface"                                     { yybegin(YYINITIAL); return ActTokenTypes.KEYWORD_STARTER; }
+<YYINITIAL> "let"                                           { yybegin(YYINITIAL); return ActTokenTypes.KEYWORD_STARTER; }
+<YYINITIAL> "mul"                                           { yybegin(YYINITIAL); return ActTokenTypes.KEYWORD_STARTER; }
+<YYINITIAL> "ret"                                           { yybegin(YYINITIAL); return ActTokenTypes.KEYWORD_STARTER; }
 
-<YYINITIAL> "if"                                            { yybegin(YYINITIAL); return ActLexerTypes.IF; }
-<YYINITIAL> "elsif"                                         { yybegin(YYINITIAL); return ActLexerTypes.ELSIF; }
-<YYINITIAL> "else"                                          { yybegin(YYINITIAL); return ActLexerTypes.ELSE; }
-<YYINITIAL> "fi"                                            { yybegin(YYINITIAL); return ActLexerTypes.FI; }
+<YYINITIAL> "if"                                            { yybegin(YYINITIAL); return ActTokenTypes.IF; }
+<YYINITIAL> "elsif"                                         { yybegin(YYINITIAL); return ActTokenTypes.ELSIF; }
+<YYINITIAL> "else"                                          { yybegin(YYINITIAL); return ActTokenTypes.ELSE; }
+<YYINITIAL> "fi"                                            { yybegin(YYINITIAL); return ActTokenTypes.FI; }
 
-<YYINITIAL> "ROOT"                                          { yybegin(YYINITIAL); return ActLexerTypes.KEYWORD; }
-<YYINITIAL> "nil"                                           { yybegin(YYINITIAL); return ActLexerTypes.KEYWORD; }
-<YYINITIAL> "yes"                                           { yybegin(YYINITIAL); return ActLexerTypes.KEYWORD; }
-<YYINITIAL> "no"                                            { yybegin(YYINITIAL); return ActLexerTypes.KEYWORD; }
-<YYINITIAL> "me"                                            { yybegin(YYINITIAL); return ActLexerTypes.KEYWORD; }
-<YYINITIAL> "Me"                                            { yybegin(YYINITIAL); return ActLexerTypes.KEYWORD; }
+<YYINITIAL> "ROOT"                                          { yybegin(YYINITIAL); return ActTokenTypes.KEYWORD; }
+<YYINITIAL> "nil"                                           { yybegin(YYINITIAL); return ActTokenTypes.KEYWORD; }
+<YYINITIAL> "yes"                                           { yybegin(YYINITIAL); return ActTokenTypes.KEYWORD; }
+<YYINITIAL> "no"                                            { yybegin(YYINITIAL); return ActTokenTypes.KEYWORD; }
+<YYINITIAL> "me"                                            { yybegin(YYINITIAL); return ActTokenTypes.KEYWORD; }
+<YYINITIAL> "Me"                                            { yybegin(YYINITIAL); return ActTokenTypes.KEYWORD; }
 
-<YYINITIAL> "do"                                            { yybegin(YYINITIAL); return ActLexerTypes.DO; }
-<YYINITIAL> "done"                                          { yybegin(YYINITIAL); return ActLexerTypes.DONE; }
+<YYINITIAL> "do"                                            { yybegin(YYINITIAL); return ActTokenTypes.DO; }
+<YYINITIAL> "done"                                          { yybegin(YYINITIAL); return ActTokenTypes.DONE; }
 
-<YYINITIAL> "("                                             { yybegin(YYINITIAL); return ActLexerTypes.PARENTHESIS_OPEN; }
-<YYINITIAL> ")"                                             { yybegin(YYINITIAL); return ActLexerTypes.PARENTHESIS_CLOSE; }
-<YYINITIAL> "["                                             { yybegin(YYINITIAL); return ActLexerTypes.SQUARE_OPEN; }
-<YYINITIAL> "]"                                             { yybegin(YYINITIAL); return ActLexerTypes.SQUARE_CLOSE; }
+<YYINITIAL> "("                                             { yybegin(YYINITIAL); return ActTokenTypes.PARENTHESIS_OPEN; }
+<YYINITIAL> ")"                                             { yybegin(YYINITIAL); return ActTokenTypes.PARENTHESIS_CLOSE; }
+<YYINITIAL> "["                                             { yybegin(YYINITIAL); return ActTokenTypes.SQUARE_OPEN; }
+<YYINITIAL> "]"                                             { yybegin(YYINITIAL); return ActTokenTypes.SQUARE_CLOSE; }
 
-<YYINITIAL> "and"                                           { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "or"                                            { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "not"                                           { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "xor"                                           { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
+<YYINITIAL> "and"                                           { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "or"                                            { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "not"                                           { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "xor"                                           { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
 
-<YYINITIAL> {WORD}                                          { yybegin(YYINITIAL); return ActLexerTypes.WORD; }
+<YYINITIAL> {WORD}                                          { yybegin(YYINITIAL); return ActTokenTypes.WORD; }
 
-<YYINITIAL> {NUMBER}                                        { yybegin(YYINITIAL); return ActLexerTypes.NUMBER; }
+<YYINITIAL> {NUMBER}                                        { yybegin(YYINITIAL); return ActTokenTypes.NUMBER; }
 
 <YYINITIAL> {COMMENT}                                       { /*Nothing to do*/ }
 
-<YYINITIAL> ";"                                             { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> ","                                             { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
+<YYINITIAL> ";"                                             { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> ","                                             { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
 
-<YYINITIAL> "<-"                                            { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> ":::"                                           { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "::"                                            { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> ":"                                             { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "<=="                                           { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "->"                                            { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "==>"                                           { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "=>"                                            { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "==="                                           { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "=="                                            { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "="                                             { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "!="                                            { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "<>"                                            { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "<=>"                                           { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "<="                                            { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "-<"                                            { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "<<<"                                           { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "<<"                                            { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "<"                                             { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> ">="                                            { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> ">-"                                            { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> ">>>"                                           { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> ">>"                                            { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> ">"                                             { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "@"                                             { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "@@"                                            { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "%%"                                            { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "%"                                             { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "//"                                            { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "/"                                             { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "**"                                            { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "*"                                             { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "--"                                            { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "-|"                                            { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "-"                                             { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "++"                                            { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "+"                                             { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "!"                                             { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "!~"                                            { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "^"                                             { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "~"                                             { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "&&&"                                           { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "&&"                                            { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "&"                                             { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "|||"                                           { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "||"                                            { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "|-"                                            { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "|"                                             { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "##"                                            { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "#~"                                            { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "#"                                             { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "???"                                           { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "??"                                            { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> "?"                                             { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
+<YYINITIAL> "<-"                                            { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> ":::"                                           { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "::"                                            { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> ":"                                             { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "<=="                                           { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "->"                                            { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "==>"                                           { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "=>"                                            { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "==="                                           { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "=="                                            { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "="                                             { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "!="                                            { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "<>"                                            { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "<=>"                                           { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "<="                                            { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "-<"                                            { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "<<<"                                           { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "<<"                                            { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "<"                                             { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> ">="                                            { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> ">-"                                            { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> ">>>"                                           { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> ">>"                                            { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> ">"                                             { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "@"                                             { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "@@"                                            { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "%%"                                            { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "%"                                             { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "//"                                            { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "/"                                             { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "**"                                            { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "*"                                             { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "--"                                            { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "-|"                                            { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "-"                                             { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "++"                                            { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "+"                                             { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "!"                                             { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "!~"                                            { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "^"                                             { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "~"                                             { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "&&&"                                           { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "&&"                                            { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "&"                                             { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "|||"                                           { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "||"                                            { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "|-"                                            { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "|"                                             { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "##"                                            { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "#~"                                            { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "#"                                             { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "???"                                           { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "??"                                            { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> "?"                                             { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
 
-<YYINITIAL> \.\.\.                                          { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
-<YYINITIAL> \.\.                                            { yybegin(YYINITIAL); return ActLexerTypes.SIGN; }
+<YYINITIAL> \.\.\.                                          { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
+<YYINITIAL> \.\.                                            { yybegin(YYINITIAL); return ActTokenTypes.SIGN; }
 
-<YYINITIAL> \.                                              { yybegin(YYINITIAL); return ActLexerTypes.DOT; }
+<YYINITIAL> \.                                              { yybegin(YYINITIAL); return ActTokenTypes.DOT; }
 
 <YYINITIAL> "{"                                             { str.setLength(0); strPart = false; yybegin(STRING); }
 <YYINITIAL> "}"                                             { str.setLength(0); strPart = true;  yybegin(STRING); }

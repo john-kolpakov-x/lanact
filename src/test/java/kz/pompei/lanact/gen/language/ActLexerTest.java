@@ -3,7 +3,6 @@ package kz.pompei.lanact.gen.language;
 import com.intellij.psi.tree.IElementType;
 import java.io.IOException;
 import kz.pompei.lanact.lexer.ActElementStr;
-import kz.pompei.lanact.lexer.ActLexerTypes;
 import org.junit.Test;
 
 public class ActLexerTest {
@@ -56,7 +55,7 @@ public class ActLexerTest {
         break;
       }
 
-      if (ActLexerTypes.WHITE_SPACE.equals(advance)) {
+      if (ActTokenTypes.WHITE_SPACE.equals(advance)) {
         continue;
       }
 
@@ -95,7 +94,7 @@ public class ActLexerTest {
         break;
       }
 
-      if (ActLexerTypes.WHITE_SPACE.equals(advance)) {
+      if (ActTokenTypes.WHITE_SPACE.equals(advance)) {
         continue;
       }
 

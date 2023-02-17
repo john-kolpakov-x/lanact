@@ -5,7 +5,7 @@ package kz.pompei.lanact.gen.language;
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
 import kz.pompei.lanact.lexer.ActElementStr;
-import kz.pompei.lanact.lexer.ActLexerTypes;
+import kz.pompei.lanact.gen.language.ActTokenTypes;
 import com.intellij.psi.TokenType;
 
 
@@ -770,47 +770,47 @@ public class ActLexer implements FlexLexer {
             // fall through
           case 31: break;
           case 2: 
-            { yybegin(YYINITIAL); return ActLexerTypes.WHITE_SPACE;
+            { yybegin(YYINITIAL); return ActTokenTypes.WHITE_SPACE;
             } 
             // fall through
           case 32: break;
           case 3: 
-            { yybegin(YYINITIAL); return ActLexerTypes.WORD;
+            { yybegin(YYINITIAL); return ActTokenTypes.WORD;
             } 
             // fall through
           case 33: break;
           case 4: 
-            { yybegin(YYINITIAL); return ActLexerTypes.NUMBER;
+            { yybegin(YYINITIAL); return ActTokenTypes.NUMBER;
             } 
             // fall through
           case 34: break;
           case 5: 
-            { yybegin(YYINITIAL); return ActLexerTypes.SIGN;
+            { yybegin(YYINITIAL); return ActTokenTypes.SIGN;
             } 
             // fall through
           case 35: break;
           case 6: 
-            { yybegin(YYINITIAL); return ActLexerTypes.DOT;
+            { yybegin(YYINITIAL); return ActTokenTypes.DOT;
             } 
             // fall through
           case 36: break;
           case 7: 
-            { yybegin(YYINITIAL); return ActLexerTypes.PARENTHESIS_OPEN;
+            { yybegin(YYINITIAL); return ActTokenTypes.PARENTHESIS_OPEN;
             } 
             // fall through
           case 37: break;
           case 8: 
-            { yybegin(YYINITIAL); return ActLexerTypes.PARENTHESIS_CLOSE;
+            { yybegin(YYINITIAL); return ActTokenTypes.PARENTHESIS_CLOSE;
             } 
             // fall through
           case 38: break;
           case 9: 
-            { yybegin(YYINITIAL); return ActLexerTypes.SQUARE_OPEN;
+            { yybegin(YYINITIAL); return ActTokenTypes.SQUARE_OPEN;
             } 
             // fall through
           case 39: break;
           case 10: 
-            { yybegin(YYINITIAL); return ActLexerTypes.SQUARE_CLOSE;
+            { yybegin(YYINITIAL); return ActTokenTypes.SQUARE_CLOSE;
             } 
             // fall through
           case 40: break;
@@ -847,22 +847,22 @@ public class ActLexer implements FlexLexer {
             // fall through
           case 46: break;
           case 17: 
-            { yybegin(YYINITIAL); return ActLexerTypes.IF;
+            { yybegin(YYINITIAL); return ActTokenTypes.IF;
             } 
             // fall through
           case 47: break;
           case 18: 
-            { yybegin(YYINITIAL); return ActLexerTypes.KEYWORD;
+            { yybegin(YYINITIAL); return ActTokenTypes.KEYWORD;
             } 
             // fall through
           case 48: break;
           case 19: 
-            { yybegin(YYINITIAL); return ActLexerTypes.FI;
+            { yybegin(YYINITIAL); return ActTokenTypes.FI;
             } 
             // fall through
           case 49: break;
           case 20: 
-            { yybegin(YYINITIAL); return ActLexerTypes.DO;
+            { yybegin(YYINITIAL); return ActTokenTypes.DO;
             } 
             // fall through
           case 50: break;
@@ -897,22 +897,22 @@ public class ActLexer implements FlexLexer {
             // fall through
           case 56: break;
           case 27: 
-            { yybegin(YYINITIAL); return ActLexerTypes.KEYWORD_STARTER;
+            { yybegin(YYINITIAL); return ActTokenTypes.KEYWORD_STARTER;
             } 
             // fall through
           case 57: break;
           case 28: 
-            { yybegin(YYINITIAL); return ActLexerTypes.ELSE;
+            { yybegin(YYINITIAL); return ActTokenTypes.ELSE;
             } 
             // fall through
           case 58: break;
           case 29: 
-            { yybegin(YYINITIAL); return ActLexerTypes.DONE;
+            { yybegin(YYINITIAL); return ActTokenTypes.DONE;
             } 
             // fall through
           case 59: break;
           case 30: 
-            { yybegin(YYINITIAL); return ActLexerTypes.ELSIF;
+            { yybegin(YYINITIAL); return ActTokenTypes.ELSIF;
             } 
             // fall through
           case 60: break;

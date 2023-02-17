@@ -8,13 +8,14 @@
   psiPackage="kz.pompei.lanact.gen.language.psi"
   psiImplPackage="kz.pompei.lanact.gen.language.impl"
 
-  elementTypeHolderClass="kz.pompei.lanact.gen.language.parser.ActParserTypes"
+  elementTypeHolderClass="kz.pompei.lanact.gen.language.ActTokenTypes"
   elementTypeClass="kz.pompei.lanact.parser.ActElementType"
   tokenTypeClass="kz.pompei.lanact.parser.ActTokenType"
 }
 
-actFile ::= item_*
+actFile ::= item_ all
 
-private item_ ::= (property|COMMENT|CRLF)
+private all ::= (WHITE_SPACE WORD SIGN DOT KEYWORD KEYWORD_STARTER NUMBER IF ELSIF ELSE FI PARENTHESIS_OPEN PARENTHESIS_CLOSE SQUARE_OPEN SQUARE_CLOSE DO DONE)
 
-property ::= (KEY? SEPARATOR VALUE?) | KEY
+private item_ ::= (all|COMMENT|CRLF|ASD)
+
