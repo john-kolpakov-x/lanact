@@ -1,0 +1,18 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <id>kz.pompei.lanact</id>
+
+    <name>Language Act</name>
+
+    <vendor email="ekolpakov@greet-go.com" url="https://greetgo.kz">greetgo!</vendor>
+
+    <description><![CDATA[
+        This plugin is realising a new program language instead C++.
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+
+    </extensions>
+</idea-plugin>
