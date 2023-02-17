@@ -5,6 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface ActAll extends PsiElement {
+public interface ActClass extends PsiElement {
+
+  @NotNull
+  ActName_ getName_();
 
 }

@@ -13,9 +13,12 @@
   tokenTypeClass="kz.pompei.lanact.parser.ActTokenType"
 }
 
-actFile ::= item_ all
+actFile ::= class
 
 private all ::= (WHITE_SPACE WORD SIGN DOT KEYWORD KEYWORD_STARTER NUMBER IF ELSIF ELSE FI PARENTHESIS_OPEN PARENTHESIS_CLOSE SQUARE_OPEN SQUARE_CLOSE DO DONE)
 
 private item_ ::= (all|COMMENT|CRLF|ASD)
 
+name_ ::= WORD (WORD|NUMBER)*
+
+class ::= 'class' name_ DO DONE

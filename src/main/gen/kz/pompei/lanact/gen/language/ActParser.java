@@ -36,15 +36,9 @@ public class ActParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // item_ all
+  // class
   static boolean actFile(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "actFile")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = item_(b, l + 1);
-    r = r && all(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
+    return class_$(b, l + 1);
   }
 
   /* ********************************************************** */
@@ -60,6 +54,19 @@ public class ActParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // 'class' name_ DO DONE
+  public static boolean class_$(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "class_$")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, CLASS, "<class $>");
+    r = consumeToken(b, "class");
+    r = r && name_(b, l + 1);
+    r = r && consumeTokens(b, 0, DO, DONE);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
   // all|COMMENT|CRLF|ASD
   static boolean item_(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "item_")) return false;
@@ -68,6 +75,39 @@ public class ActParser implements PsiParser, LightPsiParser {
     if (!r) r = consumeToken(b, COMMENT);
     if (!r) r = consumeToken(b, CRLF);
     if (!r) r = consumeToken(b, ASD);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // WORD (WORD|NUMBER)*
+  public static boolean name_(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "name_")) return false;
+    if (!nextTokenIs(b, WORD)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, WORD);
+    r = r && name__1(b, l + 1);
+    exit_section_(b, m, NAME_, r);
+    return r;
+  }
+
+  // (WORD|NUMBER)*
+  private static boolean name__1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "name__1")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!name__1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "name__1", c)) break;
+    }
+    return true;
+  }
+
+  // WORD|NUMBER
+  private static boolean name__1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "name__1_0")) return false;
+    boolean r;
+    r = consumeToken(b, WORD);
+    if (!r) r = consumeToken(b, NUMBER);
     return r;
   }
 

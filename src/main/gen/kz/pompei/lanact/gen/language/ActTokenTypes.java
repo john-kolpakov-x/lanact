@@ -4,10 +4,14 @@ package kz.pompei.lanact.gen.language;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.PsiElement;
 import com.intellij.lang.ASTNode;
+import kz.pompei.lanact.parser.ActElementType;
 import kz.pompei.lanact.parser.ActTokenType;
+import kz.pompei.lanact.gen.language.impl.*;
 
 public interface ActTokenTypes {
 
+  IElementType CLASS = new ActElementType("CLASS");
+  IElementType NAME_ = new ActElementType("NAME_");
 
   IElementType ASD = new ActTokenType("ASD");
   IElementType COMMENT = new ActTokenType("COMMENT");
@@ -31,5 +35,15 @@ public interface ActTokenTypes {
   IElementType WORD = new ActTokenType("WORD");
 
   class Factory {
+    public static PsiElement createElement(ASTNode node) {
+      IElementType type = node.getElementType();
+      if (type == CLASS) {
+        return new ActClassImpl(node);
+      }
+      else if (type == NAME_) {
+        return new ActName_Impl(node);
+      }
+      throw new AssertionError("Unknown element type: " + type);
+    }
   }
 }

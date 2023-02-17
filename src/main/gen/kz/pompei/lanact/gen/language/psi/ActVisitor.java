@@ -7,6 +7,14 @@ import com.intellij.psi.PsiElement;
 
 public class ActVisitor extends PsiElementVisitor {
 
+  public void visitClass(@NotNull ActClass o) {
+    visitPsiElement(o);
+  }
+
+  public void visitName_(@NotNull ActName_ o) {
+    visitPsiElement(o);
+  }
+
   public void visitPsiElement(@NotNull PsiElement o) {
     visitElement(o);
   }
