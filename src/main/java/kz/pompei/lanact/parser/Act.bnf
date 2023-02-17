@@ -1,0 +1,20 @@
+{
+  parserClass="kz.pompei.lanact.gen.language.ActParser"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="Simple"
+  psiImplClassSuffix="Impl"
+  psiPackage="kz.pompei.lanact.gen.language.psi"
+  psiImplPackage="kz.pompei.lanact.gen.language.impl"
+
+  elementTypeHolderClass="kz.pompei.lanact.lexer.ActLexerTypes"
+  elementTypeClass="kz.pompei.lanact.parser.ActElementType"
+  tokenTypeClass="kz.pompei.lanact.parser.ActTokenType"
+}
+
+simpleFile ::= item_*
+
+private item_ ::= (property|COMMENT|CRLF)
+
+property ::= (KEY? SEPARATOR VALUE?) | KEY

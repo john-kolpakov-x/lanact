@@ -1,4 +1,4 @@
-package kz.pompei.lanact.gen.lexer.language;
+package kz.pompei.lanact.gen.language;
 
 import com.intellij.psi.tree.IElementType;
 import java.io.IOException;

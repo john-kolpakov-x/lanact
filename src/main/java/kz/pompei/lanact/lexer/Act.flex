@@ -1,4 +1,4 @@
-package kz.pompei.lanact.gen.lexer.language;
+package kz.pompei.lanact.gen.language;
 
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
@@ -9,8 +9,11 @@ import com.intellij.psi.TokenType;
 %%
 
 %class ActLexer
+%public
 %implements FlexLexer
 %unicode
+%line
+%column
 %function advance
 %type IElementType
 %eof{  return;
@@ -18,9 +21,11 @@ import com.intellij.psi.TokenType;
 
 %{
 
-  boolean strPart = false;
+  public int yyline, yycolumn;
 
-  StringBuffer str = new StringBuffer();
+  private boolean strPart = false;
+
+  public StringBuffer str = new StringBuffer();
 
 %}
 
