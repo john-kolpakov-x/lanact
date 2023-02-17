@@ -14,7 +14,7 @@ import com.intellij.psi.TokenType;
  * <a href="http://www.jflex.de/">JFlex</a> 1.7.0
  * from the specification file <tt>Act.flex</tt>
  */
-class ActLexer implements FlexLexer {
+public class ActLexer implements FlexLexer {
 
   /** This character denotes the end of file */
   public static final int YYEOF = -1;
@@ -454,7 +454,7 @@ class ActLexer implements FlexLexer {
    *
    * @param   in  the java.io.Reader to read input from.
    */
-  ActLexer(java.io.Reader in) {
+  public ActLexer(java.io.Reader in) {
     this.zzReader = in;
   }
 
