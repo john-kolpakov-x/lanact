@@ -8,7 +8,7 @@
   psiPackage="kz.pompei.lanact.gen.language.psi"
   psiImplPackage="kz.pompei.lanact.gen.language.impl"
 
-  elementTypeHolderClass="kz.pompei.lanact.lexer.ActLexerTypes"
+  elementTypeHolderClass="kz.pompei.lanact.gen.language.parser.ActParserTypes"
   elementTypeClass="kz.pompei.lanact.parser.ActElementType"
   tokenTypeClass="kz.pompei.lanact.parser.ActTokenType"
 }
