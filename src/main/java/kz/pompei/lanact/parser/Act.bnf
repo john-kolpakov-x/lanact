@@ -3,7 +3,7 @@
 
   extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
 
-  psiClassPrefix="Simple"
+  psiClassPrefix="Act"
   psiImplClassSuffix="Impl"
   psiPackage="kz.pompei.lanact.gen.language.psi"
   psiImplPackage="kz.pompei.lanact.gen.language.impl"
@@ -13,7 +13,7 @@
   tokenTypeClass="kz.pompei.lanact.parser.ActTokenType"
 }
 
-simpleFile ::= item_*
+actFile ::= item_*
 
 private item_ ::= (property|COMMENT|CRLF)
 
