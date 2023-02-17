@@ -1,18 +1,23 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>kz.pompei.lanact</id>
+  <id>kz.pompei.lanact</id>
 
-    <name>Language Act</name>
+  <name>Language Act</name>
 
-    <vendor email="ekolpakov@greet-go.com" url="https://greetgo.kz">greetgo!</vendor>
+  <vendor email="ekolpakov@greet-go.com" url="https://greetgo.kz">greetgo!</vendor>
 
-    <description><![CDATA[
-        This plugin is realising a new program language instead C++.
-    ]]></description>
+  <description><![CDATA[
+    This plugin is realising a new program language instead of C++.
+  ]]></description>
 
-    <depends>com.intellij.modules.platform</depends>
+  <depends>com.intellij.modules.platform</depends>
 
-    <extensions defaultExtensionNs="com.intellij">
-
-    </extensions>
+  <extensions defaultExtensionNs="com.intellij">
+    <fileType
+      name="Act File"
+      implementationClass="kz.pompei.lanact.lanact.ActFileType"
+      fieldName="INSTANCE"
+      language="Act"
+      extensions="act"/>
+  </extensions>
 </idea-plugin>
