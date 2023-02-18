@@ -7,11 +7,51 @@ import com.intellij.psi.PsiElement;
 
 public class ActVisitor extends PsiElementVisitor {
 
-  public void visitClass(@NotNull ActClass o) {
+  public void visitAssignPart(@NotNull ActAssignPart o) {
     visitPsiElement(o);
   }
 
-  public void visitName_(@NotNull ActName_ o) {
+  public void visitExpression(@NotNull ActExpression o) {
+    visitPsiElement(o);
+  }
+
+  public void visitExpressionConst(@NotNull ActExpressionConst o) {
+    visitPsiElement(o);
+  }
+
+  public void visitExpressionSq(@NotNull ActExpressionSq o) {
+    visitPsiElement(o);
+  }
+
+  public void visitExpressionStr(@NotNull ActExpressionStr o) {
+    visitPsiElement(o);
+  }
+
+  public void visitId(@NotNull ActId o) {
+    visitPsiElement(o);
+  }
+
+  public void visitStatement(@NotNull ActStatement o) {
+    visitPsiElement(o);
+  }
+
+  public void visitStatementElse(@NotNull ActStatementElse o) {
+    visitPsiElement(o);
+  }
+
+  public void visitStatementElseIf(@NotNull ActStatementElseIf o) {
+    visitPsiElement(o);
+  }
+
+  public void visitStatementExpr(@NotNull ActStatementExpr o) {
+    visitPsiElement(o);
+  }
+
+  public void visitStatementIf(@NotNull ActStatementIf o) {
+    visitPsiElement(o);
+  }
+
+  public void visitStatements(@NotNull ActStatements o) {
     visitPsiElement(o);
   }
 

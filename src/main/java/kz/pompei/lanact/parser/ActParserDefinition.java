@@ -15,6 +15,7 @@ import kz.pompei.lanact.gen.language.ActTokenTypes;
 import kz.pompei.lanact.lan.ActFile;
 import kz.pompei.lanact.lan.ActLanguage;
 import kz.pompei.lanact.lexer.ActLexerAdapter;
+import kz.pompei.lanact.lexer.ActTokenSets;
 import org.jetbrains.annotations.NotNull;
 
 public class ActParserDefinition implements ParserDefinition {
@@ -38,8 +39,7 @@ public class ActParserDefinition implements ParserDefinition {
 
   @Override
   public @NotNull TokenSet getCommentTokens() {
-    // TODO pompei тут надо токены комментариев передать
-    return TokenSet.EMPTY;
+    return ActTokenSets.COMMENTS;
   }
 
   @Override

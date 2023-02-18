@@ -13,12 +13,28 @@
   tokenTypeClass="kz.pompei.lanact.parser.ActTokenType"
 }
 
-actFile ::= class
+actFile ::= COMMENT* CLASS id DO statements DONE
 
-private all ::= (WHITE_SPACE WORD SIGN DOT KEYWORD KEYWORD_STARTER NUMBER IF ELSIF ELSE FI PARENTHESIS_OPEN PARENTHESIS_CLOSE SQUARE_OPEN SQUARE_CLOSE DO DONE)
+id ::= WORD (WORD|NUMBER)*
 
-private item_ ::= (all|COMMENT|CRLF|ASD)
+statements ::= statement*
 
-name_ ::= WORD (WORD|NUMBER)*
+statement ::= statement_expr | statement_if | DO statements DONE
 
-class ::= 'class' name_ DO DONE
+statement_expr ::= LET expression assign_part?
+
+assign_part ::= ASSIGN expression
+
+statement_if ::= IF expression statements statement_else_if* statement_else? END IF
+
+expression ::= id | expression_const | PAR_OPEN expression PAR_CLOSE | expression_sq | expression_str
+
+expression_str ::= STR_OPEN expression (STR_INNER expression)* STR_CLOSE
+
+expression_sq ::= SQ_OPEN expression SQ_CLOSE
+
+expression_const ::= NUMBER | YES | NO | STR_FULL
+
+statement_else_if ::= ELSIF expression statements
+
+statement_else ::= ELSE statements

@@ -5,9 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface ActClass extends PsiElement {
+public interface ActStatementExpr extends PsiElement {
+
+  @Nullable
+  ActAssignPart getAssignPart();
 
   @NotNull
-  ActName_ getName_();
+  ActExpression getExpression();
 
 }
