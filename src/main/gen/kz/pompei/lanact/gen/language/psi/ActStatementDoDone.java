@@ -5,15 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface ActStatement extends PsiElement {
+public interface ActStatementDoDone extends PsiElement {
 
-  @Nullable
-  ActStatementDoDone getStatementDoDone();
-
-  @Nullable
-  ActStatementExpr getStatementExpr();
-
-  @Nullable
-  ActStatementIf getStatementIf();
+  @NotNull
+  ActStatements getStatements();
 
 }

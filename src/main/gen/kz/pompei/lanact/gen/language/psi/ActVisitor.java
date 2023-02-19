@@ -35,6 +35,10 @@ public class ActVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitStatementDoDone(@NotNull ActStatementDoDone o) {
+    visitPsiElement(o);
+  }
+
   public void visitStatementElse(@NotNull ActStatementElse o) {
     visitPsiElement(o);
   }

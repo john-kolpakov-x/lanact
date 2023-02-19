@@ -44,7 +44,10 @@ END_OF_LINE_COMMENT="\\"{INPUT_CHARACTER}*
 INNERT_COMMENT="\\|" {COMMENT_CONTENT} "|"+ "\\"
 COMMENT_CONTENT= ( [^|] |  \|+ [^\\] )*
 
-%state STRING
+STR_LEFT ="{" ( [^\{\}]*  [^\\] )? "{"
+STR_INNER="}" ( [^\{\}]*  [^\\] )? "{"
+STR_RIGHT="}" ( [^\{\}]*  [^\\] )? "}"
+STR_CONST="{" ( [^\{\}]*  [^\\] )? "}"
 
 %%
 
@@ -74,21 +77,9 @@ COMMENT_CONTENT= ( [^|] |  \|+ [^\\] )*
 
 <YYINITIAL> ({CRLF}|{WHITE_SPACE})+                         { yybegin(YYINITIAL); return TokenType.WHITE_SPACE; }
 
-<YYINITIAL> "{"                                             { str.setLength(0); strPart = false; yybegin(STRING); }
-<YYINITIAL> "}"                                             { str.setLength(0); strPart = true;  yybegin(STRING); }
-
-<STRING> "{"        { yybegin(YYINITIAL);
-                      return new ActElementStr(strPart ? ActElementStr.STR_INNER : ActElementStr.STR_OPEN, str.toString()); }
-<STRING> "}"        { yybegin(YYINITIAL);
-                      return new ActElementStr(strPart ? ActElementStr.STR_CLOSE : ActElementStr.STR_FULL, str.toString()); }
-
-<STRING> [^\n\r\{\}\\]+        { str.append( yytext() ); }
-<STRING> \\t                   { str.append( '\t' ); }
-<STRING> \\n                   { str.append( '\n' ); }
-
-<STRING> \\r                   { str.append( '\r' ); }
-<STRING> \\"{"                 { str.append( '{' );  }
-<STRING> \\"}"                 { str.append( '}' );  }
-<STRING> \\                    { str.append( '\\' ); }
+<YYINITIAL> {STR_LEFT}                                      { yybegin(YYINITIAL); return ActTokenTypes.STR_LEFT; }
+<YYINITIAL> {STR_INNER}                                     { yybegin(YYINITIAL); return ActTokenTypes.STR_INNER; }
+<YYINITIAL> {STR_RIGHT}                                     { yybegin(YYINITIAL); return ActTokenTypes.STR_RIGHT; }
+<YYINITIAL> {STR_CONST}                                     { yybegin(YYINITIAL); return ActTokenTypes.STR_CONST; }
 
 [^]                                                         { return TokenType.BAD_CHARACTER; }

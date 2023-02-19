@@ -33,11 +33,11 @@ statement_if ::= IF expression statements statement_else_if* statement_else? END
 
 expression ::= id | expression_const | PAR_OPEN expression PAR_CLOSE | expression_sq | expression_str
 
-expression_str ::= STR_OPEN expression (STR_INNER expression)* STR_CLOSE
+expression_str ::= STR_LEFT expression (STR_INNER expression)* STR_RIGHT
 
 expression_sq ::= SQ_OPEN expression SQ_CLOSE
 
-expression_const ::= NUMBER | YES | NO | STR_FULL
+expression_const ::= NUMBER | YES | NO | STR_CONST
 
 statement_else_if ::= ELSIF expression statements
 

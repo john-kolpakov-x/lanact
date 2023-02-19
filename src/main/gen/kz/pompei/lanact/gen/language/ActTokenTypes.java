@@ -18,6 +18,7 @@ public interface ActTokenTypes {
   IElementType ID = new ActElementType("ID");
   IElementType STATEMENT = new ActElementType("STATEMENT");
   IElementType STATEMENTS = new ActElementType("STATEMENTS");
+  IElementType STATEMENT_DO_DONE = new ActElementType("STATEMENT_DO_DONE");
   IElementType STATEMENT_ELSE = new ActElementType("STATEMENT_ELSE");
   IElementType STATEMENT_ELSE_IF = new ActElementType("STATEMENT_ELSE_IF");
   IElementType STATEMENT_EXPR = new ActElementType("STATEMENT_EXPR");
@@ -39,10 +40,10 @@ public interface ActTokenTypes {
   IElementType PAR_OPEN = new ActTokenType("PAR_OPEN");
   IElementType SQ_CLOSE = new ActTokenType("SQ_CLOSE");
   IElementType SQ_OPEN = new ActTokenType("SQ_OPEN");
-  IElementType STR_CLOSE = new ActTokenType("STR_CLOSE");
-  IElementType STR_FULL = new ActTokenType("STR_FULL");
+  IElementType STR_CONST = new ActTokenType("STR_CONST");
   IElementType STR_INNER = new ActTokenType("STR_INNER");
-  IElementType STR_OPEN = new ActTokenType("STR_OPEN");
+  IElementType STR_LEFT = new ActTokenType("STR_LEFT");
+  IElementType STR_RIGHT = new ActTokenType("STR_RIGHT");
   IElementType WORD = new ActTokenType("WORD");
   IElementType YES = new ActTokenType("YES");
 
@@ -72,6 +73,9 @@ public interface ActTokenTypes {
       }
       else if (type == STATEMENTS) {
         return new ActStatementsImpl(node);
+      }
+      else if (type == STATEMENT_DO_DONE) {
+        return new ActStatementDoDoneImpl(node);
       }
       else if (type == STATEMENT_ELSE) {
         return new ActStatementElseImpl(node);
