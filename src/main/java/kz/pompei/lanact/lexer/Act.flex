@@ -40,7 +40,7 @@ COMMENT = {INNERT_COMMENT} | {END_OF_LINE_COMMENT}
 
 INPUT_CHARACTER = [^\r\n]
 
-END_OF_LINE_COMMENT="\\"{INPUT_CHARACTER}*
+END_OF_LINE_COMMENT= "\\\\" {INPUT_CHARACTER}*
 INNERT_COMMENT="\\|" {COMMENT_CONTENT} "|"+ "\\"
 COMMENT_CONTENT= ( [^|] |  \|+ [^\\] )*
 
@@ -79,6 +79,7 @@ STR_CONST="{" ( [^\{\}]*  [^\\] )? "}"
 
 <YYINITIAL> "@"                                             { yybegin(YYINITIAL); return ActTokenTypes.DOG;         }
 <YYINITIAL> "%"                                             { yybegin(YYINITIAL); return ActTokenTypes.PERCENT;     }
+<YYINITIAL> "^"                                             { yybegin(YYINITIAL); return ActTokenTypes.CEIL;        }
 
 <YYINITIAL> ","                                             { yybegin(YYINITIAL); return ActTokenTypes.COMMA;       }
 

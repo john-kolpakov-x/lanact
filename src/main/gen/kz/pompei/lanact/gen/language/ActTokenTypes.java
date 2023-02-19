@@ -43,6 +43,7 @@ public interface ActTokenTypes {
 
   IElementType ASSIGN = new ActTokenType("ASSIGN");
   IElementType CATCH = new ActTokenType("CATCH");
+  IElementType CEIL = new ActTokenType("CEIL");
   IElementType CLASS = new ActTokenType("CLASS");
   IElementType COLON = new ActTokenType("COLON");
   IElementType COMMA = new ActTokenType("COMMA");

@@ -46,7 +46,7 @@ private statements ::= statement*
 private statement ::= statement_var_def | statement_expr | statement_ret | statement_if | statement_do_done
 
 statement_expr ::= LET expr assign_part?
-statement_ret  ::= RET expr*
+statement_ret  ::= RET expr?
 
 assign_part ::= ASSIGN expr
 
@@ -56,7 +56,7 @@ annotation ::= DOG id cortege?
 
 statement_var_def ::= LET id annotation* COLON type? assign_part?
 
-type ::= id type_annotation*
+type ::= CEIL* id type_annotation*
 
 type_annotation ::= PERCENT id cortege?
 

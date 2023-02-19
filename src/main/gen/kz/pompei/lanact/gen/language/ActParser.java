@@ -1046,25 +1046,37 @@ public class ActParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // id type_annotation*
+  // CEIL* id type_annotation*
   public static boolean type(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "type")) return false;
-    if (!nextTokenIs(b, WORD)) return false;
+    if (!nextTokenIs(b, "<type>", CEIL, WORD)) return false;
     boolean r;
-    Marker m = enter_section_(b);
-    r = id(b, l + 1);
-    r = r && type_1(b, l + 1);
-    exit_section_(b, m, TYPE, r);
+    Marker m = enter_section_(b, l, _NONE_, TYPE, "<type>");
+    r = type_0(b, l + 1);
+    r = r && id(b, l + 1);
+    r = r && type_2(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
+  // CEIL*
+  private static boolean type_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "type_0")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!consumeToken(b, CEIL)) break;
+      if (!empty_element_parsed_guard_(b, "type_0", c)) break;
+    }
+    return true;
+  }
+
   // type_annotation*
-  private static boolean type_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "type_1")) return false;
+  private static boolean type_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "type_2")) return false;
     while (true) {
       int c = current_position_(b);
       if (!type_annotation(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "type_1", c)) break;
+      if (!empty_element_parsed_guard_(b, "type_2", c)) break;
     }
     return true;
   }
