@@ -7,10 +7,13 @@ import com.intellij.psi.PsiElement;
 
 public interface ActStatementElseIf extends PsiElement {
 
-  @NotNull
-  ActExpression getExpression();
+  @Nullable
+  ActExprAdd getExprAdd();
+
+  @Nullable
+  ActExprMul getExprMul();
 
   @NotNull
-  ActStatements getStatements();
+  List<ActStatement> getStatementList();
 
 }

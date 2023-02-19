@@ -11,14 +11,14 @@ import static kz.pompei.lanact.gen.language.ActTokenTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import kz.pompei.lanact.gen.language.psi.*;
 
-public class ActExpressionConstImpl extends ASTWrapperPsiElement implements ActExpressionConst {
+public class ActOpMulImpl extends ASTWrapperPsiElement implements ActOpMul {
 
-  public ActExpressionConstImpl(@NotNull ASTNode node) {
+  public ActOpMulImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull ActVisitor visitor) {
-    visitor.visitExpressionConst(this);
+    visitor.visitOpMul(this);
   }
 
   @Override

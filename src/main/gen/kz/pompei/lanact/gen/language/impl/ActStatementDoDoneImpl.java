@@ -29,8 +29,8 @@ public class ActStatementDoDoneImpl extends ASTWrapperPsiElement implements ActS
 
   @Override
   @NotNull
-  public ActStatements getStatements() {
-    return findNotNullChildByClass(ActStatements.class);
+  public List<ActStatement> getStatementList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActStatement.class);
   }
 
 }

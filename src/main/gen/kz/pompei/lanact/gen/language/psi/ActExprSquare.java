@@ -5,9 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface ActStatementDoDone extends PsiElement {
+public interface ActExprSquare extends PsiElement {
 
-  @NotNull
-  List<ActStatement> getStatementList();
+  @Nullable
+  ActExprAdd getExprAdd();
+
+  @Nullable
+  ActExprMul getExprMul();
 
 }

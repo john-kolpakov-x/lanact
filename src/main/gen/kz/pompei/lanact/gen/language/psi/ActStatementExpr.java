@@ -10,7 +10,10 @@ public interface ActStatementExpr extends PsiElement {
   @Nullable
   ActAssignPart getAssignPart();
 
-  @NotNull
-  ActExpression getExpression();
+  @Nullable
+  ActExprAdd getExprAdd();
+
+  @Nullable
+  ActExprMul getExprMul();
 
 }

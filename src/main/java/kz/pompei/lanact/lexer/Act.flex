@@ -69,6 +69,11 @@ STR_CONST="{" ( [^\{\}]*  [^\\] )? "}"
 <YYINITIAL> "]"                                             { yybegin(YYINITIAL); return ActTokenTypes.SQ_CLOSE; }
 <YYINITIAL> "<-"                                            { yybegin(YYINITIAL); return ActTokenTypes.ASSIGN;    }
 
+<YYINITIAL> "+"                                             { yybegin(YYINITIAL); return ActTokenTypes.PLUS;    }
+<YYINITIAL> "-"                                             { yybegin(YYINITIAL); return ActTokenTypes.MINUS;    }
+<YYINITIAL> "*"                                             { yybegin(YYINITIAL); return ActTokenTypes.MUL;    }
+<YYINITIAL> "/"                                             { yybegin(YYINITIAL); return ActTokenTypes.DIV;    }
+
 <YYINITIAL> {WORD}                                          { yybegin(YYINITIAL); return ActTokenTypes.WORD; }
 
 <YYINITIAL> {NUMBER}                                        { yybegin(YYINITIAL); return ActTokenTypes.NUMBER; }

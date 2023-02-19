@@ -11,13 +11,15 @@ import kz.pompei.lanact.gen.language.impl.*;
 public interface ActTokenTypes {
 
   IElementType ASSIGN_PART = new ActElementType("ASSIGN_PART");
-  IElementType EXPRESSION = new ActElementType("EXPRESSION");
-  IElementType EXPRESSION_CONST = new ActElementType("EXPRESSION_CONST");
-  IElementType EXPRESSION_SQ = new ActElementType("EXPRESSION_SQ");
   IElementType EXPRESSION_STR = new ActElementType("EXPRESSION_STR");
+  IElementType EXPR_ADD = new ActElementType("EXPR_ADD");
+  IElementType EXPR_MUL = new ActElementType("EXPR_MUL");
+  IElementType EXPR_PAREN = new ActElementType("EXPR_PAREN");
+  IElementType EXPR_SQUARE = new ActElementType("EXPR_SQUARE");
   IElementType ID = new ActElementType("ID");
+  IElementType OP_ADD = new ActElementType("OP_ADD");
+  IElementType OP_MUL = new ActElementType("OP_MUL");
   IElementType STATEMENT = new ActElementType("STATEMENT");
-  IElementType STATEMENTS = new ActElementType("STATEMENTS");
   IElementType STATEMENT_DO_DONE = new ActElementType("STATEMENT_DO_DONE");
   IElementType STATEMENT_ELSE = new ActElementType("STATEMENT_ELSE");
   IElementType STATEMENT_ELSE_IF = new ActElementType("STATEMENT_ELSE_IF");
@@ -27,6 +29,7 @@ public interface ActTokenTypes {
   IElementType ASSIGN = new ActTokenType("ASSIGN");
   IElementType CLASS = new ActTokenType("CLASS");
   IElementType COMMENT = new ActTokenType("COMMENT");
+  IElementType DIV = new ActTokenType("DIV");
   IElementType DO = new ActTokenType("DO");
   IElementType DONE = new ActTokenType("DONE");
   IElementType ELSE = new ActTokenType("ELSE");
@@ -34,10 +37,13 @@ public interface ActTokenTypes {
   IElementType END = new ActTokenType("END");
   IElementType IF = new ActTokenType("IF");
   IElementType LET = new ActTokenType("LET");
+  IElementType MINUS = new ActTokenType("MINUS");
+  IElementType MUL = new ActTokenType("MUL");
   IElementType NO = new ActTokenType("NO");
   IElementType NUMBER = new ActTokenType("NUMBER");
   IElementType PAR_CLOSE = new ActTokenType("PAR_CLOSE");
   IElementType PAR_OPEN = new ActTokenType("PAR_OPEN");
+  IElementType PLUS = new ActTokenType("PLUS");
   IElementType SQ_CLOSE = new ActTokenType("SQ_CLOSE");
   IElementType SQ_OPEN = new ActTokenType("SQ_OPEN");
   IElementType STR_CONST = new ActTokenType("STR_CONST");
@@ -53,26 +59,32 @@ public interface ActTokenTypes {
       if (type == ASSIGN_PART) {
         return new ActAssignPartImpl(node);
       }
-      else if (type == EXPRESSION) {
-        return new ActExpressionImpl(node);
-      }
-      else if (type == EXPRESSION_CONST) {
-        return new ActExpressionConstImpl(node);
-      }
-      else if (type == EXPRESSION_SQ) {
-        return new ActExpressionSqImpl(node);
-      }
       else if (type == EXPRESSION_STR) {
         return new ActExpressionStrImpl(node);
+      }
+      else if (type == EXPR_ADD) {
+        return new ActExprAddImpl(node);
+      }
+      else if (type == EXPR_MUL) {
+        return new ActExprMulImpl(node);
+      }
+      else if (type == EXPR_PAREN) {
+        return new ActExprParenImpl(node);
+      }
+      else if (type == EXPR_SQUARE) {
+        return new ActExprSquareImpl(node);
       }
       else if (type == ID) {
         return new ActIdImpl(node);
       }
+      else if (type == OP_ADD) {
+        return new ActOpAddImpl(node);
+      }
+      else if (type == OP_MUL) {
+        return new ActOpMulImpl(node);
+      }
       else if (type == STATEMENT) {
         return new ActStatementImpl(node);
-      }
-      else if (type == STATEMENTS) {
-        return new ActStatementsImpl(node);
       }
       else if (type == STATEMENT_DO_DONE) {
         return new ActStatementDoDoneImpl(node);

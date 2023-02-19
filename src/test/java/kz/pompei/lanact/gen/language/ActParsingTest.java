@@ -12,6 +12,10 @@ public class ActParsingTest extends ParsingTestCase {
     doTest(true);
   }
 
+  public void testPlus() {
+    doTest(true);
+  }
+
   @Override
   protected boolean skipSpaces() {
     return true;

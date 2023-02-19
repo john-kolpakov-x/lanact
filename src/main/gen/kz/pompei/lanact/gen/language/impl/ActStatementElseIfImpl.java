@@ -28,15 +28,21 @@ public class ActStatementElseIfImpl extends ASTWrapperPsiElement implements ActS
   }
 
   @Override
-  @NotNull
-  public ActExpression getExpression() {
-    return findNotNullChildByClass(ActExpression.class);
+  @Nullable
+  public ActExprAdd getExprAdd() {
+    return findChildByClass(ActExprAdd.class);
+  }
+
+  @Override
+  @Nullable
+  public ActExprMul getExprMul() {
+    return findChildByClass(ActExprMul.class);
   }
 
   @Override
   @NotNull
-  public ActStatements getStatements() {
-    return findNotNullChildByClass(ActStatements.class);
+  public List<ActStatement> getStatementList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActStatement.class);
   }
 
 }

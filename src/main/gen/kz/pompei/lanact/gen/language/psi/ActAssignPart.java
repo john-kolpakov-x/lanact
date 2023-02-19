@@ -7,7 +7,10 @@ import com.intellij.psi.PsiElement;
 
 public interface ActAssignPart extends PsiElement {
 
-  @NotNull
-  ActExpression getExpression();
+  @Nullable
+  ActExprAdd getExprAdd();
+
+  @Nullable
+  ActExprMul getExprMul();
 
 }

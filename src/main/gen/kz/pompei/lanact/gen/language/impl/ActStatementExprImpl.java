@@ -34,9 +34,15 @@ public class ActStatementExprImpl extends ASTWrapperPsiElement implements ActSta
   }
 
   @Override
-  @NotNull
-  public ActExpression getExpression() {
-    return findNotNullChildByClass(ActExpression.class);
+  @Nullable
+  public ActExprAdd getExprAdd() {
+    return findChildByClass(ActExprAdd.class);
+  }
+
+  @Override
+  @Nullable
+  public ActExprMul getExprMul() {
+    return findChildByClass(ActExprMul.class);
   }
 
 }

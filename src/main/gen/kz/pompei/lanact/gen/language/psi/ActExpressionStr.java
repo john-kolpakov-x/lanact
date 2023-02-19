@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface ActExpressionStr extends PsiElement {
 
   @NotNull
-  List<ActExpression> getExpressionList();
+  List<ActExprAdd> getExprAddList();
+
+  @NotNull
+  List<ActExprMul> getExprMulList();
 
 }

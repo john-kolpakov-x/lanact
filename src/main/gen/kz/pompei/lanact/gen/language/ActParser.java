@@ -36,7 +36,7 @@ public class ActParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // COMMENT* CLASS id DO statements DONE
+  // COMMENT* CLASS id statement_do_done
   static boolean actFile(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "actFile")) return false;
     if (!nextTokenIs(b, "", CLASS, COMMENT)) return false;
@@ -45,9 +45,7 @@ public class ActParser implements PsiParser, LightPsiParser {
     r = actFile_0(b, l + 1);
     r = r && consumeToken(b, CLASS);
     r = r && id(b, l + 1);
-    r = r && consumeToken(b, DO);
-    r = r && statements(b, l + 1);
-    r = r && consumeToken(b, DONE);
+    r = r && statement_do_done(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -77,57 +75,138 @@ public class ActParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // id | expression_const | PAR_OPEN expression PAR_CLOSE | expression_sq | expression_str
-  public static boolean expression(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "expression")) return false;
+  // expr_group_primary (op_mul expr_group_primary)+
+  public static boolean expr_add(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "expr_add")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, EXPRESSION, "<expression>");
-    r = id(b, l + 1);
-    if (!r) r = expression_const(b, l + 1);
-    if (!r) r = expression_2(b, l + 1);
-    if (!r) r = expression_sq(b, l + 1);
-    if (!r) r = expression_str(b, l + 1);
+    Marker m = enter_section_(b, l, _NONE_, EXPR_ADD, "<expr add>");
+    r = expr_group_primary(b, l + 1);
+    r = r && expr_add_1(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  // PAR_OPEN expression PAR_CLOSE
-  private static boolean expression_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "expression_2")) return false;
+  // (op_mul expr_group_primary)+
+  private static boolean expr_add_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "expr_add_1")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, PAR_OPEN);
-    r = r && expression(b, l + 1);
-    r = r && consumeToken(b, PAR_CLOSE);
+    r = expr_add_1_0(b, l + 1);
+    while (r) {
+      int c = current_position_(b);
+      if (!expr_add_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "expr_add_1", c)) break;
+    }
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // op_mul expr_group_primary
+  private static boolean expr_add_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "expr_add_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = op_mul(b, l + 1);
+    r = r && expr_group_primary(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   /* ********************************************************** */
   // NUMBER | YES | NO | STR_CONST
-  public static boolean expression_const(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "expression_const")) return false;
+  static boolean expr_const(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "expr_const")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, EXPRESSION_CONST, "<expression const>");
     r = consumeToken(b, NUMBER);
     if (!r) r = consumeToken(b, YES);
     if (!r) r = consumeToken(b, NO);
     if (!r) r = consumeToken(b, STR_CONST);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // id | expr_const | expr_square | expression_str | expr_paren | statement_do_done
+  static boolean expr_group_primary(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "expr_group_primary")) return false;
+    boolean r;
+    r = id(b, l + 1);
+    if (!r) r = expr_const(b, l + 1);
+    if (!r) r = expr_square(b, l + 1);
+    if (!r) r = expression_str(b, l + 1);
+    if (!r) r = expr_paren(b, l + 1);
+    if (!r) r = statement_do_done(b, l + 1);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // expr_add (op_add expr_add)*
+  public static boolean expr_mul(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "expr_mul")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, EXPR_MUL, "<expr mul>");
+    r = expr_add(b, l + 1);
+    r = r && expr_mul_1(b, l + 1);
     exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // (op_add expr_add)*
+  private static boolean expr_mul_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "expr_mul_1")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!expr_mul_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "expr_mul_1", c)) break;
+    }
+    return true;
+  }
+
+  // op_add expr_add
+  private static boolean expr_mul_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "expr_mul_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = op_add(b, l + 1);
+    r = r && expr_add(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // PAR_OPEN expression PAR_CLOSE
+  public static boolean expr_paren(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "expr_paren")) return false;
+    if (!nextTokenIs(b, PAR_OPEN)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, PAR_OPEN);
+    r = r && expression(b, l + 1);
+    r = r && consumeToken(b, PAR_CLOSE);
+    exit_section_(b, m, EXPR_PAREN, r);
     return r;
   }
 
   /* ********************************************************** */
   // SQ_OPEN expression SQ_CLOSE
-  public static boolean expression_sq(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "expression_sq")) return false;
+  public static boolean expr_square(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "expr_square")) return false;
     if (!nextTokenIs(b, SQ_OPEN)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, SQ_OPEN);
     r = r && expression(b, l + 1);
     r = r && consumeToken(b, SQ_CLOSE);
-    exit_section_(b, m, EXPRESSION_SQ, r);
+    exit_section_(b, m, EXPR_SQUARE, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // expr_mul | expr_add
+  static boolean expression(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "expression")) return false;
+    boolean r;
+    r = expr_mul(b, l + 1);
+    if (!r) r = expr_add(b, l + 1);
     return r;
   }
 
@@ -198,6 +277,32 @@ public class ActParser implements PsiParser, LightPsiParser {
     boolean r;
     r = consumeToken(b, WORD);
     if (!r) r = consumeToken(b, NUMBER);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // PLUS | MINUS
+  public static boolean op_add(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "op_add")) return false;
+    if (!nextTokenIs(b, "<op add>", MINUS, PLUS)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, OP_ADD, "<op add>");
+    r = consumeToken(b, PLUS);
+    if (!r) r = consumeToken(b, MINUS);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // MUL | DIV
+  public static boolean op_mul(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "op_mul")) return false;
+    if (!nextTokenIs(b, "<op mul>", DIV, MUL)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, OP_MUL, "<op mul>");
+    r = consumeToken(b, MUL);
+    if (!r) r = consumeToken(b, DIV);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -313,15 +418,13 @@ public class ActParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // statement*
-  public static boolean statements(PsiBuilder b, int l) {
+  static boolean statements(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "statements")) return false;
-    Marker m = enter_section_(b, l, _NONE_, STATEMENTS, "<statements>");
     while (true) {
       int c = current_position_(b);
       if (!statement(b, l + 1)) break;
       if (!empty_element_parsed_guard_(b, "statements", c)) break;
     }
-    exit_section_(b, l, m, true, false, null);
     return true;
   }
 

@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface ActStatementElse extends PsiElement {
 
   @NotNull
-  ActStatements getStatements();
+  List<ActStatement> getStatementList();
 
 }
