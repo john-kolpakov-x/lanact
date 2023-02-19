@@ -74,10 +74,6 @@ COMMENT_CONTENT= ( [^|] |  \|+ [^\\] )*
 
 <YYINITIAL> ({CRLF}|{WHITE_SPACE})+                         { yybegin(YYINITIAL); return TokenType.WHITE_SPACE; }
 
-<YYINITIAL> {WHITE_SPACE}+                                  { yybegin(WAITING_VALUE); return TokenType.WHITE_SPACE; }
-
-<YYINITIAL> ({CRLF}|{WHITE_SPACE})+                         { yybegin(YYINITIAL); return TokenType.WHITE_SPACE; }
-
 <YYINITIAL> "{"                                             { str.setLength(0); strPart = false; yybegin(STRING); }
 <YYINITIAL> "}"                                             { str.setLength(0); strPart = true;  yybegin(STRING); }
 
