@@ -5,6 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface ActOpAdd extends PsiElement {
+public interface ActExprStr extends PsiElement {
+
+  @NotNull
+  List<ActExprMul> getExprMulList();
 
 }

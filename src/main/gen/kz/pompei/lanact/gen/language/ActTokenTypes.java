@@ -11,14 +11,15 @@ import kz.pompei.lanact.gen.language.impl.*;
 public interface ActTokenTypes {
 
   IElementType ASSIGN_PART = new ActElementType("ASSIGN_PART");
-  IElementType EXPRESSION_STR = new ActElementType("EXPRESSION_STR");
+  IElementType CORTEGE = new ActElementType("CORTEGE");
   IElementType EXPR_ADD = new ActElementType("EXPR_ADD");
+  IElementType EXPR_CALL = new ActElementType("EXPR_CALL");
+  IElementType EXPR_DOT = new ActElementType("EXPR_DOT");
   IElementType EXPR_MUL = new ActElementType("EXPR_MUL");
   IElementType EXPR_PAREN = new ActElementType("EXPR_PAREN");
   IElementType EXPR_SQUARE = new ActElementType("EXPR_SQUARE");
+  IElementType EXPR_STR = new ActElementType("EXPR_STR");
   IElementType ID = new ActElementType("ID");
-  IElementType OP_ADD = new ActElementType("OP_ADD");
-  IElementType OP_MUL = new ActElementType("OP_MUL");
   IElementType STATEMENT = new ActElementType("STATEMENT");
   IElementType STATEMENT_DO_DONE = new ActElementType("STATEMENT_DO_DONE");
   IElementType STATEMENT_ELSE = new ActElementType("STATEMENT_ELSE");
@@ -28,10 +29,12 @@ public interface ActTokenTypes {
 
   IElementType ASSIGN = new ActTokenType("ASSIGN");
   IElementType CLASS = new ActTokenType("CLASS");
+  IElementType COMMA = new ActTokenType("COMMA");
   IElementType COMMENT = new ActTokenType("COMMENT");
   IElementType DIV = new ActTokenType("DIV");
   IElementType DO = new ActTokenType("DO");
   IElementType DONE = new ActTokenType("DONE");
+  IElementType DOT = new ActTokenType("DOT");
   IElementType ELSE = new ActTokenType("ELSE");
   IElementType ELSIF = new ActTokenType("ELSIF");
   IElementType END = new ActTokenType("END");
@@ -59,11 +62,17 @@ public interface ActTokenTypes {
       if (type == ASSIGN_PART) {
         return new ActAssignPartImpl(node);
       }
-      else if (type == EXPRESSION_STR) {
-        return new ActExpressionStrImpl(node);
+      else if (type == CORTEGE) {
+        return new ActCortegeImpl(node);
       }
       else if (type == EXPR_ADD) {
         return new ActExprAddImpl(node);
+      }
+      else if (type == EXPR_CALL) {
+        return new ActExprCallImpl(node);
+      }
+      else if (type == EXPR_DOT) {
+        return new ActExprDotImpl(node);
       }
       else if (type == EXPR_MUL) {
         return new ActExprMulImpl(node);
@@ -74,14 +83,11 @@ public interface ActTokenTypes {
       else if (type == EXPR_SQUARE) {
         return new ActExprSquareImpl(node);
       }
+      else if (type == EXPR_STR) {
+        return new ActExprStrImpl(node);
+      }
       else if (type == ID) {
         return new ActIdImpl(node);
-      }
-      else if (type == OP_ADD) {
-        return new ActOpAddImpl(node);
-      }
-      else if (type == OP_MUL) {
-        return new ActOpMulImpl(node);
       }
       else if (type == STATEMENT) {
         return new ActStatementImpl(node);

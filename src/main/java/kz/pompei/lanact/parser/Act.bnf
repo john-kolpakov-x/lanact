@@ -25,34 +25,48 @@ statement ::= statement_expr | statement_if | statement_do_done
 
 statement_do_done ::= DO statements DONE
 
-statement_expr ::= LET expression assign_part?
+statement_expr ::= LET expr assign_part?
 
-assign_part ::= ASSIGN expression
+assign_part ::= ASSIGN expr
 
-statement_if ::= IF expression statements statement_else_if* statement_else? END IF
+statement_if ::= IF expr statements statement_else_if* statement_else? END IF
 
-expression_str ::= STR_LEFT expression (STR_INNER expression)* STR_RIGHT
+//
+// Expressions
+//
 
-statement_else_if ::= ELSIF expression statements
+expr_str ::= STR_LEFT expr (STR_INNER expr)* STR_RIGHT
+
+statement_else_if ::= ELSIF expr statements
 
 statement_else ::= ELSE statements
 
-private expression ::= expr_mul | expr_add
+private expr ::= expr_mul
 
-private expr_group_primary ::= id | expr_const | expr_square | expression_str | expr_paren | statement_do_done
+expr_dot ::= expr_primary (DOT id cortege?)*
 
-expr_paren ::= PAR_OPEN expression PAR_CLOSE
-expr_square ::= SQ_OPEN expression SQ_CLOSE
+private expr_primary ::= expr_call | expr_const | expr_square | expr_str | expr_paren
+
+expr_call ::= id cortege?
+
+expr_paren  ::= PAR_OPEN expr PAR_CLOSE
+expr_square ::=  SQ_OPEN expr SQ_CLOSE
 private expr_const ::= NUMBER | YES | NO | STR_CONST
 
 //
 //
-// arithmetic expressions
+// Arithmetic Expressions
 //
 //
 
-op_add ::= PLUS | MINUS
-expr_add ::= expr_group_primary (op_mul expr_group_primary)+
+private op_add ::= PLUS | MINUS
+expr_add ::= expr_dot (op_mul expr_dot)*
 
-op_mul ::= MUL | DIV
+private op_mul ::= MUL | DIV
 expr_mul ::= expr_add (op_add expr_add)*
+
+//
+// Cortege
+//
+
+cortege ::= PAR_OPEN (expr (COMMA expr)* COMMA?)? PAR_CLOSE

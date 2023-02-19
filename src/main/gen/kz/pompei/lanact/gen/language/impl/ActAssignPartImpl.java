@@ -28,15 +28,9 @@ public class ActAssignPartImpl extends ASTWrapperPsiElement implements ActAssign
   }
 
   @Override
-  @Nullable
-  public ActExprAdd getExprAdd() {
-    return findChildByClass(ActExprAdd.class);
-  }
-
-  @Override
-  @Nullable
+  @NotNull
   public ActExprMul getExprMul() {
-    return findChildByClass(ActExprMul.class);
+    return findNotNullChildByClass(ActExprMul.class);
   }
 
 }

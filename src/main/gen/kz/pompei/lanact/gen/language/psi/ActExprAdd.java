@@ -8,21 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface ActExprAdd extends PsiElement {
 
   @NotNull
-  List<ActExprParen> getExprParenList();
-
-  @NotNull
-  List<ActExprSquare> getExprSquareList();
-
-  @NotNull
-  List<ActExpressionStr> getExpressionStrList();
-
-  @NotNull
-  List<ActId> getIdList();
-
-  @NotNull
-  List<ActOpMul> getOpMulList();
-
-  @NotNull
-  List<ActStatementDoDone> getStatementDoDoneList();
+  List<ActExprDot> getExprDotList();
 
 }

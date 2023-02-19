@@ -10,7 +10,4 @@ public interface ActExprMul extends PsiElement {
   @NotNull
   List<ActExprAdd> getExprAddList();
 
-  @NotNull
-  List<ActOpAdd> getOpAddList();
-
 }

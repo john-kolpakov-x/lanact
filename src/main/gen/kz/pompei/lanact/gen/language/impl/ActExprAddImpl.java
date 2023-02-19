@@ -29,38 +29,8 @@ public class ActExprAddImpl extends ASTWrapperPsiElement implements ActExprAdd {
 
   @Override
   @NotNull
-  public List<ActExprParen> getExprParenList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActExprParen.class);
-  }
-
-  @Override
-  @NotNull
-  public List<ActExprSquare> getExprSquareList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActExprSquare.class);
-  }
-
-  @Override
-  @NotNull
-  public List<ActExpressionStr> getExpressionStrList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActExpressionStr.class);
-  }
-
-  @Override
-  @NotNull
-  public List<ActId> getIdList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActId.class);
-  }
-
-  @Override
-  @NotNull
-  public List<ActOpMul> getOpMulList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActOpMul.class);
-  }
-
-  @Override
-  @NotNull
-  public List<ActStatementDoDone> getStatementDoDoneList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActStatementDoDone.class);
+  public List<ActExprDot> getExprDotList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActExprDot.class);
   }
 
 }

@@ -11,14 +11,14 @@ import static kz.pompei.lanact.gen.language.ActTokenTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import kz.pompei.lanact.gen.language.psi.*;
 
-public class ActStatementIfImpl extends ASTWrapperPsiElement implements ActStatementIf {
+public class ActExprDotImpl extends ASTWrapperPsiElement implements ActExprDot {
 
-  public ActStatementIfImpl(@NotNull ASTNode node) {
+  public ActExprDotImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull ActVisitor visitor) {
-    visitor.visitStatementIf(this);
+    visitor.visitExprDot(this);
   }
 
   @Override
@@ -29,26 +29,38 @@ public class ActStatementIfImpl extends ASTWrapperPsiElement implements ActState
 
   @Override
   @NotNull
-  public ActExprMul getExprMul() {
-    return findNotNullChildByClass(ActExprMul.class);
-  }
-
-  @Override
-  @NotNull
-  public List<ActStatement> getStatementList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActStatement.class);
+  public List<ActCortege> getCortegeList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActCortege.class);
   }
 
   @Override
   @Nullable
-  public ActStatementElse getStatementElse() {
-    return findChildByClass(ActStatementElse.class);
+  public ActExprCall getExprCall() {
+    return findChildByClass(ActExprCall.class);
+  }
+
+  @Override
+  @Nullable
+  public ActExprParen getExprParen() {
+    return findChildByClass(ActExprParen.class);
+  }
+
+  @Override
+  @Nullable
+  public ActExprSquare getExprSquare() {
+    return findChildByClass(ActExprSquare.class);
+  }
+
+  @Override
+  @Nullable
+  public ActExprStr getExprStr() {
+    return findChildByClass(ActExprStr.class);
   }
 
   @Override
   @NotNull
-  public List<ActStatementElseIf> getStatementElseIfList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActStatementElseIf.class);
+  public List<ActId> getIdList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActId.class);
   }
 
 }

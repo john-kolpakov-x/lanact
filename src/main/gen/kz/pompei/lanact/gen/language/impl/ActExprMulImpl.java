@@ -33,10 +33,4 @@ public class ActExprMulImpl extends ASTWrapperPsiElement implements ActExprMul {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, ActExprAdd.class);
   }
 
-  @Override
-  @NotNull
-  public List<ActOpAdd> getOpAddList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActOpAdd.class);
-  }
-
 }

@@ -5,6 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface ActOpMul extends PsiElement {
+public interface ActExprCall extends PsiElement {
+
+  @Nullable
+  ActCortege getCortege();
+
+  @NotNull
+  ActId getId();
 
 }

@@ -7,10 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface ActExprParen extends PsiElement {
 
-  @Nullable
-  ActExprAdd getExprAdd();
-
-  @Nullable
+  @NotNull
   ActExprMul getExprMul();
 
 }
