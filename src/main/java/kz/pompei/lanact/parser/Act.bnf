@@ -11,6 +11,8 @@
   elementTypeHolderClass="kz.pompei.lanact.gen.language.ActTokenTypes"
   elementTypeClass="kz.pompei.lanact.parser.ActElementType"
   tokenTypeClass="kz.pompei.lanact.parser.ActTokenType"
+
+
 }
 
 actFile ::= COMMENT* CLASS id DO statements DONE
@@ -19,7 +21,9 @@ id ::= WORD (WORD|NUMBER)*
 
 statements ::= statement*
 
-statement ::= statement_expr | statement_if | DO statements DONE
+statement ::= statement_expr | statement_if | statement_do_done
+
+statement_do_done ::= DO statements DONE
 
 statement_expr ::= LET expression assign_part?
 

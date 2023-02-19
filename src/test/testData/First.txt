@@ -1,0 +1,8 @@
+Act File(0,18)
+  PsiElement(ActTokenType.CLASS)('class')(0,5)
+  ActIdImpl(ID)(6,9)
+    PsiElement(ActTokenType.WORD)('Asd')(6,9)
+  PsiElement(ActTokenType.DO)('do')(11,13)
+  ActStatementsImpl(STATEMENTS)(14,14)
+    <empty list>
+  PsiElement(ActTokenType.DONE)('done')(14,18)
