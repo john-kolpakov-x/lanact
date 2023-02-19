@@ -11,14 +11,14 @@ import static kz.pompei.lanact.gen.language.ActTokenTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import kz.pompei.lanact.gen.language.psi.*;
 
-public class ActExprMulImpl extends ASTWrapperPsiElement implements ActExprMul {
+public class ActPartFinallyImpl extends ASTWrapperPsiElement implements ActPartFinally {
 
-  public ActExprMulImpl(@NotNull ASTNode node) {
+  public ActPartFinallyImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull ActVisitor visitor) {
-    visitor.visitExprMul(this);
+    visitor.visitPartFinally(this);
   }
 
   @Override
@@ -29,8 +29,20 @@ public class ActExprMulImpl extends ASTWrapperPsiElement implements ActExprMul {
 
   @Override
   @NotNull
-  public List<ActExprAdd> getExprAddList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActExprAdd.class);
+  public List<ActStatementDoDone> getStatementDoDoneList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActStatementDoDone.class);
+  }
+
+  @Override
+  @NotNull
+  public List<ActStatementExpr> getStatementExprList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActStatementExpr.class);
+  }
+
+  @Override
+  @NotNull
+  public List<ActStatementIf> getStatementIfList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActStatementIf.class);
   }
 
 }

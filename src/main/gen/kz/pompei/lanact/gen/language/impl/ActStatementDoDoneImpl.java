@@ -28,9 +28,27 @@ public class ActStatementDoDoneImpl extends ASTWrapperPsiElement implements ActS
   }
 
   @Override
+  @Nullable
+  public ActDoDoneLast getDoDoneLast() {
+    return findChildByClass(ActDoDoneLast.class);
+  }
+
+  @Override
   @NotNull
-  public List<ActStatement> getStatementList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActStatement.class);
+  public List<ActStatementDoDone> getStatementDoDoneList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActStatementDoDone.class);
+  }
+
+  @Override
+  @NotNull
+  public List<ActStatementExpr> getStatementExprList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActStatementExpr.class);
+  }
+
+  @Override
+  @NotNull
+  public List<ActStatementIf> getStatementIfList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActStatementIf.class);
   }
 
 }

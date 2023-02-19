@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface ActAssignPart extends PsiElement {
 
   @NotNull
-  ActExprMul getExprMul();
+  ActExprOp2 getExprOp2();
 
 }

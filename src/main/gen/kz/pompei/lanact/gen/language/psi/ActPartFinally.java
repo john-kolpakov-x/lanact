@@ -5,10 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface ActStatementElseIf extends PsiElement {
-
-  @NotNull
-  ActExprOp2 getExprOp2();
+public interface ActPartFinally extends PsiElement {
 
   @NotNull
   List<ActStatementDoDone> getStatementDoDoneList();

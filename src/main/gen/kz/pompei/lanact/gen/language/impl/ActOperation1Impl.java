@@ -11,38 +11,20 @@ import static kz.pompei.lanact.gen.language.ActTokenTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import kz.pompei.lanact.gen.language.psi.*;
 
-public class ActStatementImpl extends ASTWrapperPsiElement implements ActStatement {
+public class ActOperation1Impl extends ASTWrapperPsiElement implements ActOperation1 {
 
-  public ActStatementImpl(@NotNull ASTNode node) {
+  public ActOperation1Impl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull ActVisitor visitor) {
-    visitor.visitStatement(this);
+    visitor.visitOperation1(this);
   }
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof ActVisitor) accept((ActVisitor)visitor);
     else super.accept(visitor);
-  }
-
-  @Override
-  @Nullable
-  public ActStatementDoDone getStatementDoDone() {
-    return findChildByClass(ActStatementDoDone.class);
-  }
-
-  @Override
-  @Nullable
-  public ActStatementExpr getStatementExpr() {
-    return findChildByClass(ActStatementExpr.class);
-  }
-
-  @Override
-  @Nullable
-  public ActStatementIf getStatementIf() {
-    return findChildByClass(ActStatementIf.class);
   }
 
 }

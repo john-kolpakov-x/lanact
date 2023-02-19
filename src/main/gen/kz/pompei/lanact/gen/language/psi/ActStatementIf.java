@@ -8,15 +8,21 @@ import com.intellij.psi.PsiElement;
 public interface ActStatementIf extends PsiElement {
 
   @NotNull
-  ActExprMul getExprMul();
+  ActExprOp2 getExprOp2();
 
   @NotNull
-  List<ActStatement> getStatementList();
+  List<ActStatementDoDone> getStatementDoDoneList();
 
   @Nullable
   ActStatementElse getStatementElse();
 
   @NotNull
   List<ActStatementElseIf> getStatementElseIfList();
+
+  @NotNull
+  List<ActStatementExpr> getStatementExprList();
+
+  @NotNull
+  List<ActStatementIf> getStatementIfList();
 
 }

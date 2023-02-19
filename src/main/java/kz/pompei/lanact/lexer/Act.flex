@@ -34,7 +34,7 @@ CRLF=\R
 WHITE_SPACE=[\ \n\t\f]
 
 WORD=[[:letter:]_][[:letter:]_0-9]*
-NUMBER=[+-]?[0-9]([0-9_]*[0-9])*(\.[0-9]([0-9_]*[0-9])*)?([eE][+-]?[0-9]+)?([a-zA-Z][a-zA-Z0-9_]*)?
+NUMBER=[0-9]([0-9_]*[0-9])*(\.[0-9]([0-9_]*[0-9])*)?([eE][+-]?[0-9]+)?([a-zA-Z][a-zA-Z0-9_]*)?
 
 COMMENT = {INNERT_COMMENT} | {END_OF_LINE_COMMENT}
 
@@ -54,7 +54,10 @@ STR_CONST="{" ( [^\{\}]*  [^\\] )? "}"
 <YYINITIAL> {END_OF_LINE_COMMENT}                           { yybegin(YYINITIAL); return ActTokenTypes.COMMENT;   }
 
 <YYINITIAL> "class"                                         { yybegin(YYINITIAL); return ActTokenTypes.CLASS;     }
+<YYINITIAL> "interface"                                     { yybegin(YYINITIAL); return ActTokenTypes.INTERFACE; }
 <YYINITIAL> "do"                                            { yybegin(YYINITIAL); return ActTokenTypes.DO;        }
+<YYINITIAL> "catch"                                         { yybegin(YYINITIAL); return ActTokenTypes.CATCH;     }
+<YYINITIAL> "finally"                                       { yybegin(YYINITIAL); return ActTokenTypes.FINALLY;   }
 <YYINITIAL> "done"                                          { yybegin(YYINITIAL); return ActTokenTypes.DONE;      }
 <YYINITIAL> "if"                                            { yybegin(YYINITIAL); return ActTokenTypes.IF;        }
 <YYINITIAL> "elsif"                                         { yybegin(YYINITIAL); return ActTokenTypes.ELSIF;     }
@@ -65,29 +68,62 @@ STR_CONST="{" ( [^\{\}]*  [^\\] )? "}"
 <YYINITIAL> "no"                                            { yybegin(YYINITIAL); return ActTokenTypes.NO;        }
 <YYINITIAL> "("                                             { yybegin(YYINITIAL); return ActTokenTypes.PAR_OPEN;  }
 <YYINITIAL> ")"                                             { yybegin(YYINITIAL); return ActTokenTypes.PAR_CLOSE; }
-<YYINITIAL> "["                                             { yybegin(YYINITIAL); return ActTokenTypes.SQ_OPEN;  }
-<YYINITIAL> "]"                                             { yybegin(YYINITIAL); return ActTokenTypes.SQ_CLOSE; }
+<YYINITIAL> "["                                             { yybegin(YYINITIAL); return ActTokenTypes.SQ_OPEN;   }
+<YYINITIAL> "]"                                             { yybegin(YYINITIAL); return ActTokenTypes.SQ_CLOSE;  }
 <YYINITIAL> "<-"                                            { yybegin(YYINITIAL); return ActTokenTypes.ASSIGN;    }
+<YYINITIAL> "nil"                                           { yybegin(YYINITIAL); return ActTokenTypes.NIL;       }
+<YYINITIAL> "fun"                                           { yybegin(YYINITIAL); return ActTokenTypes.FUN;       }
 
-<YYINITIAL> ","                                             { yybegin(YYINITIAL); return ActTokenTypes.COMMA;    }
+<YYINITIAL> ","                                             { yybegin(YYINITIAL); return ActTokenTypes.COMMA;     }
 
-<YYINITIAL> "."                                             { yybegin(YYINITIAL); return ActTokenTypes.DOT;    }
+<YYINITIAL> "."                                             { yybegin(YYINITIAL); return ActTokenTypes.DOT;       }
 
-<YYINITIAL> "*"                                             { yybegin(YYINITIAL); return ActTokenTypes.MUL;    }
-<YYINITIAL> "/"                                             { yybegin(YYINITIAL); return ActTokenTypes.DIV;    }
+<YYINITIAL> "not"                                           { yybegin(YYINITIAL); return ActTokenTypes.OP1;       }
 
-<YYINITIAL> "+"                                             { yybegin(YYINITIAL); return ActTokenTypes.PLUS;    }
-<YYINITIAL> "-"                                             { yybegin(YYINITIAL); return ActTokenTypes.MINUS;    }
+<YYINITIAL> "**"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;       }
+<YYINITIAL> "*"                                             { yybegin(YYINITIAL); return ActTokenTypes.OP2;       }
+<YYINITIAL> "//"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;       }
+<YYINITIAL> "/"                                             { yybegin(YYINITIAL); return ActTokenTypes.OP2;       }
+<YYINITIAL> "%%"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;       }
+<YYINITIAL> "%"                                             { yybegin(YYINITIAL); return ActTokenTypes.OP2;       }
 
-<YYINITIAL> {WORD}                                          { yybegin(YYINITIAL); return ActTokenTypes.WORD; }
+<YYINITIAL> "++"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;       }
+<YYINITIAL> "+"                                             { yybegin(YYINITIAL); return ActTokenTypes.OP12;      }
+<YYINITIAL> "--"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;       }
+<YYINITIAL> "-"                                             { yybegin(YYINITIAL); return ActTokenTypes.OP12;      }
 
-<YYINITIAL> {NUMBER}                                        { yybegin(YYINITIAL); return ActTokenTypes.NUMBER; }
+<YYINITIAL> "and"                                           { yybegin(YYINITIAL); return ActTokenTypes.OP2;       }
 
-<YYINITIAL> {COMMENT}                                        { yybegin(YYINITIAL); return ActTokenTypes.COMMENT; }
+<YYINITIAL> "or"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;       }
+<YYINITIAL> "xor"                                           { yybegin(YYINITIAL); return ActTokenTypes.OP2;       }
 
-<YYINITIAL> ({CRLF}|{WHITE_SPACE})+                         { yybegin(YYINITIAL); return TokenType.WHITE_SPACE; }
+<YYINITIAL> "<<<"                                           { yybegin(YYINITIAL); return ActTokenTypes.OP2;       }
+<YYINITIAL> "<<"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;       }
+<YYINITIAL> ">>>"                                           { yybegin(YYINITIAL); return ActTokenTypes.OP2;       }
+<YYINITIAL> ">>"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;       }
 
-<YYINITIAL> {STR_LEFT}                                      { yybegin(YYINITIAL); return ActTokenTypes.STR_LEFT; }
+<YYINITIAL> "==="                                           { yybegin(YYINITIAL); return ActTokenTypes.OP2;        }
+<YYINITIAL> "=="                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;        }
+<YYINITIAL> "="                                             { yybegin(YYINITIAL); return ActTokenTypes.OP2;        }
+<YYINITIAL> "!="                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;        }
+<YYINITIAL> "<>"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;        }
+<YYINITIAL> "<"                                             { yybegin(YYINITIAL); return ActTokenTypes.OP2;        }
+<YYINITIAL> "<="                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;        }
+<YYINITIAL> ">"                                             { yybegin(YYINITIAL); return ActTokenTypes.OP2;        }
+<YYINITIAL> ">="                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;        }
+<YYINITIAL> "<=>"                                           { yybegin(YYINITIAL); return ActTokenTypes.OP2;        }
+
+<YYINITIAL> "-<"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;        }
+<YYINITIAL> ">-"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;        }
+<YYINITIAL> "??"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;        }
+
+
+<YYINITIAL> {WORD}                                          { yybegin(YYINITIAL); return ActTokenTypes.WORD;     }
+<YYINITIAL> {NUMBER}                                        { yybegin(YYINITIAL); return ActTokenTypes.NUMBER;   }
+<YYINITIAL> {COMMENT}                                       { yybegin(YYINITIAL); return ActTokenTypes.COMMENT;  }
+<YYINITIAL> ({CRLF}|{WHITE_SPACE})+                         { yybegin(YYINITIAL); return TokenType.WHITE_SPACE;  }
+
+<YYINITIAL> {STR_LEFT}                                      { yybegin(YYINITIAL); return ActTokenTypes.STR_LEFT;  }
 <YYINITIAL> {STR_INNER}                                     { yybegin(YYINITIAL); return ActTokenTypes.STR_INNER; }
 <YYINITIAL> {STR_RIGHT}                                     { yybegin(YYINITIAL); return ActTokenTypes.STR_RIGHT; }
 <YYINITIAL> {STR_CONST}                                     { yybegin(YYINITIAL); return ActTokenTypes.STR_CONST; }

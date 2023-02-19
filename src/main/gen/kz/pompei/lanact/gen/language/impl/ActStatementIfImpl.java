@@ -29,14 +29,14 @@ public class ActStatementIfImpl extends ASTWrapperPsiElement implements ActState
 
   @Override
   @NotNull
-  public ActExprMul getExprMul() {
-    return findNotNullChildByClass(ActExprMul.class);
+  public ActExprOp2 getExprOp2() {
+    return findNotNullChildByClass(ActExprOp2.class);
   }
 
   @Override
   @NotNull
-  public List<ActStatement> getStatementList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActStatement.class);
+  public List<ActStatementDoDone> getStatementDoDoneList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActStatementDoDone.class);
   }
 
   @Override
@@ -49,6 +49,18 @@ public class ActStatementIfImpl extends ASTWrapperPsiElement implements ActState
   @NotNull
   public List<ActStatementElseIf> getStatementElseIfList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, ActStatementElseIf.class);
+  }
+
+  @Override
+  @NotNull
+  public List<ActStatementExpr> getStatementExprList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActStatementExpr.class);
+  }
+
+  @Override
+  @NotNull
+  public List<ActStatementIf> getStatementIfList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActStatementIf.class);
   }
 
 }

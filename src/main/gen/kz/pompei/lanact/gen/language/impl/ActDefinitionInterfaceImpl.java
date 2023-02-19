@@ -11,14 +11,14 @@ import static kz.pompei.lanact.gen.language.ActTokenTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import kz.pompei.lanact.gen.language.psi.*;
 
-public class ActExprSquareImpl extends ASTWrapperPsiElement implements ActExprSquare {
+public class ActDefinitionInterfaceImpl extends ASTWrapperPsiElement implements ActDefinitionInterface {
 
-  public ActExprSquareImpl(@NotNull ASTNode node) {
+  public ActDefinitionInterfaceImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull ActVisitor visitor) {
-    visitor.visitExprSquare(this);
+    visitor.visitDefinitionInterface(this);
   }
 
   @Override
@@ -29,8 +29,14 @@ public class ActExprSquareImpl extends ASTWrapperPsiElement implements ActExprSq
 
   @Override
   @NotNull
-  public ActExprOp2 getExprOp2() {
-    return findNotNullChildByClass(ActExprOp2.class);
+  public ActDefinitions getDefinitions() {
+    return findNotNullChildByClass(ActDefinitions.class);
+  }
+
+  @Override
+  @NotNull
+  public ActId getId() {
+    return findNotNullChildByClass(ActId.class);
   }
 
 }

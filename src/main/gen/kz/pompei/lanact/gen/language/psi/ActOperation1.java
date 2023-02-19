@@ -5,9 +5,6 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface ActCortege extends PsiElement {
-
-  @NotNull
-  List<ActExprOp2> getExprOp2List();
+public interface ActOperation1 extends PsiElement {
 
 }

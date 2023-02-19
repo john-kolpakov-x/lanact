@@ -35,8 +35,8 @@ public class ActStatementExprImpl extends ASTWrapperPsiElement implements ActSta
 
   @Override
   @NotNull
-  public ActExprMul getExprMul() {
-    return findNotNullChildByClass(ActExprMul.class);
+  public ActExprOp2 getExprOp2() {
+    return findNotNullChildByClass(ActExprOp2.class);
   }
 
 }

@@ -7,7 +7,16 @@ import com.intellij.psi.PsiElement;
 
 public interface ActStatementDoDone extends PsiElement {
 
+  @Nullable
+  ActDoDoneLast getDoDoneLast();
+
   @NotNull
-  List<ActStatement> getStatementList();
+  List<ActStatementDoDone> getStatementDoDoneList();
+
+  @NotNull
+  List<ActStatementExpr> getStatementExprList();
+
+  @NotNull
+  List<ActStatementIf> getStatementIfList();
 
 }

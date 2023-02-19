@@ -5,9 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface ActExprMul extends PsiElement {
+public interface ActDoDoneLast extends PsiElement {
 
   @NotNull
-  List<ActExprAdd> getExprAddList();
+  List<ActPartCatch> getPartCatchList();
+
+  @Nullable
+  ActPartFinally getPartFinally();
 
 }

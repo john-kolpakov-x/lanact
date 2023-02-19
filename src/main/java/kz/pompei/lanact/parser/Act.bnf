@@ -15,15 +15,30 @@
 
 }
 
-actFile ::= COMMENT* CLASS id statement_do_done
+actFile ::= COMMENT* definition_top
+
+private definition_top ::= definition_class | definition_interface
+
+definition_class ::= CLASS id definitions END CLASS
+
+definition_interface ::= INTERFACE id definitions END INTERFACE
+
+definitions ::= definition_fun
+
+definition_fun ::= FUN id statement_do_done?
 
 id ::= WORD (WORD|NUMBER)*
 
+statement_do_done ::= DO statements do_done_last? DONE
+
+do_done_last ::= part_catch+ part_finally?
+
+part_catch   ::= CATCH   statements
+part_finally ::= FINALLY statements
+
 private statements ::= statement*
 
-statement ::= statement_expr | statement_if | statement_do_done
-
-statement_do_done ::= DO statements DONE
+private statement ::= statement_expr | statement_if | statement_do_done
 
 statement_expr ::= LET expr assign_part?
 
@@ -41,32 +56,23 @@ statement_else_if ::= ELSIF expr statements
 
 statement_else ::= ELSE statements
 
-private expr ::= expr_mul
+private expr ::= expr_op2
 
-expr_dot ::= expr_primary (DOT id cortege?)*
+operation1 ::= OP1 | OP12
+operation2 ::= OP2 | OP12
 
-private expr_primary ::= expr_call | expr_const | expr_square | expr_str | expr_paren
+expr_dot ::= expr_single (DOT id cortege?)*
+
+private expr_op1 ::= operation1? expr_dot
+private expr_single ::= expr_call | expr_const | expr_square | expr_str | expr_paren
 
 expr_call ::= id cortege?
 
 expr_paren  ::= PAR_OPEN expr PAR_CLOSE
 expr_square ::=  SQ_OPEN expr SQ_CLOSE
-private expr_const ::= NUMBER | YES | NO | STR_CONST
+private expr_const ::= NUMBER | YES | NO | NIL | STR_CONST
 
-//
-//
-// Arithmetic Expressions
-//
-//
 
-private op_add ::= PLUS | MINUS
-expr_add ::= expr_dot (op_mul expr_dot)*
-
-private op_mul ::= MUL | DIV
-expr_mul ::= expr_add (op_add expr_add)*
-
-//
-// Cortege
-//
+expr_op2 ::= expr_op1 (operation2 expr_dot)*
 
 cortege ::= PAR_OPEN (expr (COMMA expr)* COMMA?)? PAR_CLOSE
