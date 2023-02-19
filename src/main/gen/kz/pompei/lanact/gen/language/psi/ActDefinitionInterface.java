@@ -8,7 +8,10 @@ import com.intellij.psi.PsiElement;
 public interface ActDefinitionInterface extends PsiElement {
 
   @NotNull
-  ActDefinitions getDefinitions();
+  List<ActAnnotation> getAnnotationList();
+
+  @NotNull
+  List<ActDefinition> getDefinitionList();
 
   @NotNull
   ActId getId();

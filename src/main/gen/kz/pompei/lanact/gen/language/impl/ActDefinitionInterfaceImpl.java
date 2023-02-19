@@ -29,8 +29,14 @@ public class ActDefinitionInterfaceImpl extends ASTWrapperPsiElement implements 
 
   @Override
   @NotNull
-  public ActDefinitions getDefinitions() {
-    return findNotNullChildByClass(ActDefinitions.class);
+  public List<ActAnnotation> getAnnotationList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActAnnotation.class);
+  }
+
+  @Override
+  @NotNull
+  public List<ActDefinition> getDefinitionList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActDefinition.class);
   }
 
   @Override

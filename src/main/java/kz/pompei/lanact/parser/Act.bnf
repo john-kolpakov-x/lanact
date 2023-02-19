@@ -17,19 +17,22 @@
 
 actFile ::= COMMENT* part_import* definition_top
 
+id ::= WORD (WORD|NUMBER)*
+
 part_import ::= IMPORT id ASSIGN expr
 
 private definition_top ::= definition_class | definition_interface
 
-definition_class ::= CLASS id definitions END CLASS
+definition_class ::= CLASS id annotation* definition* END CLASS
 
-definition_interface ::= INTERFACE id definitions END INTERFACE
+definition_interface ::= INTERFACE id annotation* definition* END INTERFACE
 
-definitions ::= definition_fun
+definition ::= definition_fun
 
-definition_fun ::= FUN id statement_do_done?
+definition_fun ::= FUN id arg_def_cortege? ((RIGHT_ARROW type) | (ASSIGN id COLON type))? annotation* statement_do_done?
 
-id ::= WORD (WORD|NUMBER)*
+arg_def_cortege ::= PAR_OPEN (      id (COMMA id)* COLON type (ASSIGN expr)?
+                             (COMMA id (COMMA id)* COLON type (ASSIGN expr)?)* COMMA?)? PAR_CLOSE
 
 statement_do_done ::= DO statements do_done_last? DONE
 
@@ -40,13 +43,22 @@ part_finally ::= FINALLY statements
 
 private statements ::= statement*
 
-private statement ::= statement_expr | statement_if | statement_do_done
+private statement ::= statement_var_def | statement_expr | statement_ret | statement_if | statement_do_done
 
 statement_expr ::= LET expr assign_part?
+statement_ret  ::= RET expr*
 
 assign_part ::= ASSIGN expr
 
 statement_if ::= IF expr statements statement_else_if* statement_else? END IF
+
+annotation ::= DOG id cortege?
+
+statement_var_def ::= LET id annotation* COLON type? assign_part?
+
+type ::= id type_annotation*
+
+type_annotation ::= PERCENT id cortege?
 
 //
 // Expressions

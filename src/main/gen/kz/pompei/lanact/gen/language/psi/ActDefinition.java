@@ -5,15 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface ActDefinitionClass extends PsiElement {
+public interface ActDefinition extends PsiElement {
 
   @NotNull
-  List<ActAnnotation> getAnnotationList();
-
-  @NotNull
-  List<ActDefinition> getDefinitionList();
-
-  @NotNull
-  ActId getId();
+  ActDefinitionFun getDefinitionFun();
 
 }

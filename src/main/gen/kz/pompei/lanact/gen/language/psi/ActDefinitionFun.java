@@ -8,9 +8,18 @@ import com.intellij.psi.PsiElement;
 public interface ActDefinitionFun extends PsiElement {
 
   @NotNull
-  ActId getId();
+  List<ActAnnotation> getAnnotationList();
+
+  @Nullable
+  ActArgDefCortege getArgDefCortege();
+
+  @NotNull
+  List<ActId> getIdList();
 
   @Nullable
   ActStatementDoDone getStatementDoDone();
+
+  @Nullable
+  ActType getType();
 
 }

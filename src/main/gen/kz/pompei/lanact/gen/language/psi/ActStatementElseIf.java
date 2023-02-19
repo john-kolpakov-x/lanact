@@ -19,4 +19,10 @@ public interface ActStatementElseIf extends PsiElement {
   @NotNull
   List<ActStatementIf> getStatementIfList();
 
+  @NotNull
+  List<ActStatementRet> getStatementRetList();
+
+  @NotNull
+  List<ActStatementVarDef> getStatementVarDefList();
+
 }

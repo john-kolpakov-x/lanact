@@ -51,77 +51,82 @@ STR_CONST="{" ( [^\{\}]*  [^\\] )? "}"
 
 %%
 
-<YYINITIAL> {END_OF_LINE_COMMENT}                           { yybegin(YYINITIAL); return ActTokenTypes.COMMENT;   }
+<YYINITIAL> {END_OF_LINE_COMMENT}                           { yybegin(YYINITIAL); return ActTokenTypes.COMMENT;     }
 
-<YYINITIAL> "class"                                         { yybegin(YYINITIAL); return ActTokenTypes.CLASS;     }
-<YYINITIAL> "interface"                                     { yybegin(YYINITIAL); return ActTokenTypes.INTERFACE; }
-<YYINITIAL> "do"                                            { yybegin(YYINITIAL); return ActTokenTypes.DO;        }
-<YYINITIAL> "catch"                                         { yybegin(YYINITIAL); return ActTokenTypes.CATCH;     }
-<YYINITIAL> "finally"                                       { yybegin(YYINITIAL); return ActTokenTypes.FINALLY;   }
-<YYINITIAL> "done"                                          { yybegin(YYINITIAL); return ActTokenTypes.DONE;      }
-<YYINITIAL> "if"                                            { yybegin(YYINITIAL); return ActTokenTypes.IF;        }
-<YYINITIAL> "elsif"                                         { yybegin(YYINITIAL); return ActTokenTypes.ELSIF;     }
-<YYINITIAL> "else"                                          { yybegin(YYINITIAL); return ActTokenTypes.ELSE;      }
-<YYINITIAL> "end"                                           { yybegin(YYINITIAL); return ActTokenTypes.END;       }
-<YYINITIAL> "let"                                           { yybegin(YYINITIAL); return ActTokenTypes.LET;       }
-<YYINITIAL> "yes"                                           { yybegin(YYINITIAL); return ActTokenTypes.YES;       }
-<YYINITIAL> "no"                                            { yybegin(YYINITIAL); return ActTokenTypes.NO;        }
-<YYINITIAL> "("                                             { yybegin(YYINITIAL); return ActTokenTypes.PAR_OPEN;  }
-<YYINITIAL> ")"                                             { yybegin(YYINITIAL); return ActTokenTypes.PAR_CLOSE; }
-<YYINITIAL> "["                                             { yybegin(YYINITIAL); return ActTokenTypes.SQ_OPEN;   }
-<YYINITIAL> "]"                                             { yybegin(YYINITIAL); return ActTokenTypes.SQ_CLOSE;  }
-<YYINITIAL> "<-"                                            { yybegin(YYINITIAL); return ActTokenTypes.ASSIGN;    }
-<YYINITIAL> "nil"                                           { yybegin(YYINITIAL); return ActTokenTypes.NIL;       }
-<YYINITIAL> "fun"                                           { yybegin(YYINITIAL); return ActTokenTypes.FUN;       }
-<YYINITIAL> "import"                                        { yybegin(YYINITIAL); return ActTokenTypes.IMPORT;    }
+<YYINITIAL> "class"                                         { yybegin(YYINITIAL); return ActTokenTypes.CLASS;       }
+<YYINITIAL> "interface"                                     { yybegin(YYINITIAL); return ActTokenTypes.INTERFACE;   }
+<YYINITIAL> "do"                                            { yybegin(YYINITIAL); return ActTokenTypes.DO;          }
+<YYINITIAL> "catch"                                         { yybegin(YYINITIAL); return ActTokenTypes.CATCH;       }
+<YYINITIAL> "finally"                                       { yybegin(YYINITIAL); return ActTokenTypes.FINALLY;     }
+<YYINITIAL> "done"                                          { yybegin(YYINITIAL); return ActTokenTypes.DONE;        }
+<YYINITIAL> "if"                                            { yybegin(YYINITIAL); return ActTokenTypes.IF;          }
+<YYINITIAL> "elsif"                                         { yybegin(YYINITIAL); return ActTokenTypes.ELSIF;       }
+<YYINITIAL> "else"                                          { yybegin(YYINITIAL); return ActTokenTypes.ELSE;        }
+<YYINITIAL> "end"                                           { yybegin(YYINITIAL); return ActTokenTypes.END;         }
+<YYINITIAL> "let"                                           { yybegin(YYINITIAL); return ActTokenTypes.LET;         }
+<YYINITIAL> "yes"                                           { yybegin(YYINITIAL); return ActTokenTypes.YES;         }
+<YYINITIAL> "no"                                            { yybegin(YYINITIAL); return ActTokenTypes.NO;          }
+<YYINITIAL> "("                                             { yybegin(YYINITIAL); return ActTokenTypes.PAR_OPEN;    }
+<YYINITIAL> ")"                                             { yybegin(YYINITIAL); return ActTokenTypes.PAR_CLOSE;   }
+<YYINITIAL> "["                                             { yybegin(YYINITIAL); return ActTokenTypes.SQ_OPEN;     }
+<YYINITIAL> "]"                                             { yybegin(YYINITIAL); return ActTokenTypes.SQ_CLOSE;    }
+<YYINITIAL> "<-"                                            { yybegin(YYINITIAL); return ActTokenTypes.ASSIGN;      }
+<YYINITIAL> "->"                                            { yybegin(YYINITIAL); return ActTokenTypes.RIGHT_ARROW; }
+<YYINITIAL> "nil"                                           { yybegin(YYINITIAL); return ActTokenTypes.NIL;         }
+<YYINITIAL> "fun"                                           { yybegin(YYINITIAL); return ActTokenTypes.FUN;         }
+<YYINITIAL> "import"                                        { yybegin(YYINITIAL); return ActTokenTypes.IMPORT;      }
+<YYINITIAL> "ret"                                           { yybegin(YYINITIAL); return ActTokenTypes.RET;         }
 
-<YYINITIAL> ","                                             { yybegin(YYINITIAL); return ActTokenTypes.COMMA;     }
+<YYINITIAL> "@"                                             { yybegin(YYINITIAL); return ActTokenTypes.DOG;         }
+<YYINITIAL> "%"                                             { yybegin(YYINITIAL); return ActTokenTypes.PERCENT;     }
 
-<YYINITIAL> "."                                             { yybegin(YYINITIAL); return ActTokenTypes.DOT;       }
+<YYINITIAL> ","                                             { yybegin(YYINITIAL); return ActTokenTypes.COMMA;       }
 
-<YYINITIAL> "not"                                           { yybegin(YYINITIAL); return ActTokenTypes.OP1;       }
+<YYINITIAL> "."                                             { yybegin(YYINITIAL); return ActTokenTypes.DOT;         }
 
-<YYINITIAL> "**"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;       }
-<YYINITIAL> "*"                                             { yybegin(YYINITIAL); return ActTokenTypes.OP2;       }
-<YYINITIAL> "//"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;       }
-<YYINITIAL> "/"                                             { yybegin(YYINITIAL); return ActTokenTypes.OP2;       }
-<YYINITIAL> "%%"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;       }
-<YYINITIAL> "%"                                             { yybegin(YYINITIAL); return ActTokenTypes.OP2;       }
+<YYINITIAL> "not"                                           { yybegin(YYINITIAL); return ActTokenTypes.OP1;         }
 
-<YYINITIAL> "++"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;       }
-<YYINITIAL> "+"                                             { yybegin(YYINITIAL); return ActTokenTypes.OP12;      }
-<YYINITIAL> "--"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;       }
-<YYINITIAL> "-"                                             { yybegin(YYINITIAL); return ActTokenTypes.OP12;      }
+<YYINITIAL> "**"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
+<YYINITIAL> "*"                                             { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
+<YYINITIAL> "//"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
+<YYINITIAL> "/"                                             { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
+<YYINITIAL> "%%"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
+<YYINITIAL> "%"                                             { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
 
-<YYINITIAL> "and"                                           { yybegin(YYINITIAL); return ActTokenTypes.OP2;       }
+<YYINITIAL> "++"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
+<YYINITIAL> "+"                                             { yybegin(YYINITIAL); return ActTokenTypes.OP12;        }
+<YYINITIAL> "--"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
+<YYINITIAL> "-"                                             { yybegin(YYINITIAL); return ActTokenTypes.OP12;        }
 
-<YYINITIAL> "or"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;       }
-<YYINITIAL> "xor"                                           { yybegin(YYINITIAL); return ActTokenTypes.OP2;       }
+<YYINITIAL> "and"                                           { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
 
-<YYINITIAL> "<<<"                                           { yybegin(YYINITIAL); return ActTokenTypes.OP2;       }
-<YYINITIAL> "<<"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;       }
-<YYINITIAL> ">>>"                                           { yybegin(YYINITIAL); return ActTokenTypes.OP2;       }
-<YYINITIAL> ">>"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;       }
+<YYINITIAL> "or"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
+<YYINITIAL> "xor"                                           { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
 
-<YYINITIAL> "==="                                           { yybegin(YYINITIAL); return ActTokenTypes.OP2;        }
-<YYINITIAL> "=="                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;        }
-<YYINITIAL> "="                                             { yybegin(YYINITIAL); return ActTokenTypes.OP2;        }
-<YYINITIAL> "!="                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;        }
-<YYINITIAL> "<>"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;        }
-<YYINITIAL> "<"                                             { yybegin(YYINITIAL); return ActTokenTypes.OP2;        }
-<YYINITIAL> "<="                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;        }
-<YYINITIAL> ">"                                             { yybegin(YYINITIAL); return ActTokenTypes.OP2;        }
-<YYINITIAL> ">="                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;        }
-<YYINITIAL> "<=>"                                           { yybegin(YYINITIAL); return ActTokenTypes.OP2;        }
+<YYINITIAL> "<<<"                                           { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
+<YYINITIAL> "<<"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
+<YYINITIAL> ">>>"                                           { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
+<YYINITIAL> ">>"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
 
-<YYINITIAL> "-<"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;        }
-<YYINITIAL> ">-"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;        }
-<YYINITIAL> "??"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;        }
+<YYINITIAL> "==="                                           { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
+<YYINITIAL> "=="                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
+<YYINITIAL> "="                                             { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
+<YYINITIAL> "!="                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
+<YYINITIAL> "<>"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
+<YYINITIAL> "<"                                             { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
+<YYINITIAL> "<="                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
+<YYINITIAL> ">"                                             { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
+<YYINITIAL> ">="                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
+<YYINITIAL> "<=>"                                           { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
+
+<YYINITIAL> "-<"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
+<YYINITIAL> ">-"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
+<YYINITIAL> "??"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
 
 //<YYINITIAL> "?"                                             { yybegin(YYINITIAL); return ActTokenTypes.QUESTION;   }
 //<YYINITIAL> ":::"                                           { yybegin(YYINITIAL); return ActTokenTypes.COLON3;     }
 //<YYINITIAL> "::"                                            { yybegin(YYINITIAL); return ActTokenTypes.COLON2;     }
-//<YYINITIAL> ":"                                             { yybegin(YYINITIAL); return ActTokenTypes.COLON;      }
+<YYINITIAL> ":"                                             { yybegin(YYINITIAL); return ActTokenTypes.COLON;       }
 
 
 <YYINITIAL> {WORD}                                          { yybegin(YYINITIAL); return ActTokenTypes.WORD;     }

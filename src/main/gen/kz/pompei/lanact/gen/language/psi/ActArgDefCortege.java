@@ -5,15 +5,15 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface ActDefinitionClass extends PsiElement {
+public interface ActArgDefCortege extends PsiElement {
 
   @NotNull
-  List<ActAnnotation> getAnnotationList();
+  List<ActExprOp2> getExprOp2List();
 
   @NotNull
-  List<ActDefinition> getDefinitionList();
+  List<ActId> getIdList();
 
   @NotNull
-  ActId getId();
+  List<ActType> getTypeList();
 
 }

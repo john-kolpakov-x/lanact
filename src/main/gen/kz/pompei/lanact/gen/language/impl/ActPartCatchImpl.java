@@ -45,4 +45,16 @@ public class ActPartCatchImpl extends ASTWrapperPsiElement implements ActPartCat
     return PsiTreeUtil.getChildrenOfTypeAsList(this, ActStatementIf.class);
   }
 
+  @Override
+  @NotNull
+  public List<ActStatementRet> getStatementRetList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActStatementRet.class);
+  }
+
+  @Override
+  @NotNull
+  public List<ActStatementVarDef> getStatementVarDefList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActStatementVarDef.class);
+  }
+
 }

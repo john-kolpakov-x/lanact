@@ -11,14 +11,14 @@ import static kz.pompei.lanact.gen.language.ActTokenTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import kz.pompei.lanact.gen.language.psi.*;
 
-public class ActDefinitionClassImpl extends ASTWrapperPsiElement implements ActDefinitionClass {
+public class ActArgDefCortegeImpl extends ASTWrapperPsiElement implements ActArgDefCortege {
 
-  public ActDefinitionClassImpl(@NotNull ASTNode node) {
+  public ActArgDefCortegeImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull ActVisitor visitor) {
-    visitor.visitDefinitionClass(this);
+    visitor.visitArgDefCortege(this);
   }
 
   @Override
@@ -29,20 +29,20 @@ public class ActDefinitionClassImpl extends ASTWrapperPsiElement implements ActD
 
   @Override
   @NotNull
-  public List<ActAnnotation> getAnnotationList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActAnnotation.class);
+  public List<ActExprOp2> getExprOp2List() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActExprOp2.class);
   }
 
   @Override
   @NotNull
-  public List<ActDefinition> getDefinitionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActDefinition.class);
+  public List<ActId> getIdList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActId.class);
   }
 
   @Override
   @NotNull
-  public ActId getId() {
-    return findNotNullChildByClass(ActId.class);
+  public List<ActType> getTypeList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActType.class);
   }
 
 }

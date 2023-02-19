@@ -29,14 +29,32 @@ public class ActDefinitionFunImpl extends ASTWrapperPsiElement implements ActDef
 
   @Override
   @NotNull
-  public ActId getId() {
-    return findNotNullChildByClass(ActId.class);
+  public List<ActAnnotation> getAnnotationList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActAnnotation.class);
+  }
+
+  @Override
+  @Nullable
+  public ActArgDefCortege getArgDefCortege() {
+    return findChildByClass(ActArgDefCortege.class);
+  }
+
+  @Override
+  @NotNull
+  public List<ActId> getIdList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActId.class);
   }
 
   @Override
   @Nullable
   public ActStatementDoDone getStatementDoDone() {
     return findChildByClass(ActStatementDoDone.class);
+  }
+
+  @Override
+  @Nullable
+  public ActType getType() {
+    return findChildByClass(ActType.class);
   }
 
 }

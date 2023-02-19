@@ -5,9 +5,18 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface ActDefinitions extends PsiElement {
+public interface ActStatementVarDef extends PsiElement {
 
   @NotNull
-  ActDefinitionFun getDefinitionFun();
+  List<ActAnnotation> getAnnotationList();
+
+  @Nullable
+  ActAssignPart getAssignPart();
+
+  @NotNull
+  ActId getId();
+
+  @Nullable
+  ActType getType();
 
 }

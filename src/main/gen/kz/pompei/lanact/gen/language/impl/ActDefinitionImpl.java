@@ -11,14 +11,14 @@ import static kz.pompei.lanact.gen.language.ActTokenTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import kz.pompei.lanact.gen.language.psi.*;
 
-public class ActDefinitionClassImpl extends ASTWrapperPsiElement implements ActDefinitionClass {
+public class ActDefinitionImpl extends ASTWrapperPsiElement implements ActDefinition {
 
-  public ActDefinitionClassImpl(@NotNull ASTNode node) {
+  public ActDefinitionImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull ActVisitor visitor) {
-    visitor.visitDefinitionClass(this);
+    visitor.visitDefinition(this);
   }
 
   @Override
@@ -29,20 +29,8 @@ public class ActDefinitionClassImpl extends ASTWrapperPsiElement implements ActD
 
   @Override
   @NotNull
-  public List<ActAnnotation> getAnnotationList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActAnnotation.class);
-  }
-
-  @Override
-  @NotNull
-  public List<ActDefinition> getDefinitionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActDefinition.class);
-  }
-
-  @Override
-  @NotNull
-  public ActId getId() {
-    return findNotNullChildByClass(ActId.class);
+  public ActDefinitionFun getDefinitionFun() {
+    return findNotNullChildByClass(ActDefinitionFun.class);
   }
 
 }

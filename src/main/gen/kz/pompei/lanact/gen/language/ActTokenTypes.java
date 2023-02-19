@@ -10,9 +10,11 @@ import kz.pompei.lanact.gen.language.impl.*;
 
 public interface ActTokenTypes {
 
+  IElementType ANNOTATION = new ActElementType("ANNOTATION");
+  IElementType ARG_DEF_CORTEGE = new ActElementType("ARG_DEF_CORTEGE");
   IElementType ASSIGN_PART = new ActElementType("ASSIGN_PART");
   IElementType CORTEGE = new ActElementType("CORTEGE");
-  IElementType DEFINITIONS = new ActElementType("DEFINITIONS");
+  IElementType DEFINITION = new ActElementType("DEFINITION");
   IElementType DEFINITION_CLASS = new ActElementType("DEFINITION_CLASS");
   IElementType DEFINITION_FUN = new ActElementType("DEFINITION_FUN");
   IElementType DEFINITION_INTERFACE = new ActElementType("DEFINITION_INTERFACE");
@@ -34,13 +36,19 @@ public interface ActTokenTypes {
   IElementType STATEMENT_ELSE_IF = new ActElementType("STATEMENT_ELSE_IF");
   IElementType STATEMENT_EXPR = new ActElementType("STATEMENT_EXPR");
   IElementType STATEMENT_IF = new ActElementType("STATEMENT_IF");
+  IElementType STATEMENT_RET = new ActElementType("STATEMENT_RET");
+  IElementType STATEMENT_VAR_DEF = new ActElementType("STATEMENT_VAR_DEF");
+  IElementType TYPE = new ActElementType("TYPE");
+  IElementType TYPE_ANNOTATION = new ActElementType("TYPE_ANNOTATION");
 
   IElementType ASSIGN = new ActTokenType("ASSIGN");
   IElementType CATCH = new ActTokenType("CATCH");
   IElementType CLASS = new ActTokenType("CLASS");
+  IElementType COLON = new ActTokenType("COLON");
   IElementType COMMA = new ActTokenType("COMMA");
   IElementType COMMENT = new ActTokenType("COMMENT");
   IElementType DO = new ActTokenType("DO");
+  IElementType DOG = new ActTokenType("DOG");
   IElementType DONE = new ActTokenType("DONE");
   IElementType DOT = new ActTokenType("DOT");
   IElementType ELSE = new ActTokenType("ELSE");
@@ -60,6 +68,9 @@ public interface ActTokenTypes {
   IElementType OP2 = new ActTokenType("OP2");
   IElementType PAR_CLOSE = new ActTokenType("PAR_CLOSE");
   IElementType PAR_OPEN = new ActTokenType("PAR_OPEN");
+  IElementType PERCENT = new ActTokenType("PERCENT");
+  IElementType RET = new ActTokenType("RET");
+  IElementType RIGHT_ARROW = new ActTokenType("RIGHT_ARROW");
   IElementType SQ_CLOSE = new ActTokenType("SQ_CLOSE");
   IElementType SQ_OPEN = new ActTokenType("SQ_OPEN");
   IElementType STR_CONST = new ActTokenType("STR_CONST");
@@ -72,14 +83,20 @@ public interface ActTokenTypes {
   class Factory {
     public static PsiElement createElement(ASTNode node) {
       IElementType type = node.getElementType();
-      if (type == ASSIGN_PART) {
+      if (type == ANNOTATION) {
+        return new ActAnnotationImpl(node);
+      }
+      else if (type == ARG_DEF_CORTEGE) {
+        return new ActArgDefCortegeImpl(node);
+      }
+      else if (type == ASSIGN_PART) {
         return new ActAssignPartImpl(node);
       }
       else if (type == CORTEGE) {
         return new ActCortegeImpl(node);
       }
-      else if (type == DEFINITIONS) {
-        return new ActDefinitionsImpl(node);
+      else if (type == DEFINITION) {
+        return new ActDefinitionImpl(node);
       }
       else if (type == DEFINITION_CLASS) {
         return new ActDefinitionClassImpl(node);
@@ -143,6 +160,18 @@ public interface ActTokenTypes {
       }
       else if (type == STATEMENT_IF) {
         return new ActStatementIfImpl(node);
+      }
+      else if (type == STATEMENT_RET) {
+        return new ActStatementRetImpl(node);
+      }
+      else if (type == STATEMENT_VAR_DEF) {
+        return new ActStatementVarDefImpl(node);
+      }
+      else if (type == TYPE) {
+        return new ActTypeImpl(node);
+      }
+      else if (type == TYPE_ANNOTATION) {
+        return new ActTypeAnnotationImpl(node);
       }
       throw new AssertionError("Unknown element type: " + type);
     }

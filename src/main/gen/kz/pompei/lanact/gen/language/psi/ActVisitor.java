@@ -7,11 +7,23 @@ import com.intellij.psi.PsiElement;
 
 public class ActVisitor extends PsiElementVisitor {
 
+  public void visitAnnotation(@NotNull ActAnnotation o) {
+    visitPsiElement(o);
+  }
+
+  public void visitArgDefCortege(@NotNull ActArgDefCortege o) {
+    visitPsiElement(o);
+  }
+
   public void visitAssignPart(@NotNull ActAssignPart o) {
     visitPsiElement(o);
   }
 
   public void visitCortege(@NotNull ActCortege o) {
+    visitPsiElement(o);
+  }
+
+  public void visitDefinition(@NotNull ActDefinition o) {
     visitPsiElement(o);
   }
 
@@ -24,10 +36,6 @@ public class ActVisitor extends PsiElementVisitor {
   }
 
   public void visitDefinitionInterface(@NotNull ActDefinitionInterface o) {
-    visitPsiElement(o);
-  }
-
-  public void visitDefinitions(@NotNull ActDefinitions o) {
     visitPsiElement(o);
   }
 
@@ -100,6 +108,22 @@ public class ActVisitor extends PsiElementVisitor {
   }
 
   public void visitStatementIf(@NotNull ActStatementIf o) {
+    visitPsiElement(o);
+  }
+
+  public void visitStatementRet(@NotNull ActStatementRet o) {
+    visitPsiElement(o);
+  }
+
+  public void visitStatementVarDef(@NotNull ActStatementVarDef o) {
+    visitPsiElement(o);
+  }
+
+  public void visitType(@NotNull ActType o) {
+    visitPsiElement(o);
+  }
+
+  public void visitTypeAnnotation(@NotNull ActTypeAnnotation o) {
     visitPsiElement(o);
   }
 
