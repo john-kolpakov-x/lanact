@@ -73,6 +73,7 @@ STR_CONST="{" ( [^\{\}]*  [^\\] )? "}"
 <YYINITIAL> "<-"                                            { yybegin(YYINITIAL); return ActTokenTypes.ASSIGN;    }
 <YYINITIAL> "nil"                                           { yybegin(YYINITIAL); return ActTokenTypes.NIL;       }
 <YYINITIAL> "fun"                                           { yybegin(YYINITIAL); return ActTokenTypes.FUN;       }
+<YYINITIAL> "import"                                        { yybegin(YYINITIAL); return ActTokenTypes.IMPORT;    }
 
 <YYINITIAL> ","                                             { yybegin(YYINITIAL); return ActTokenTypes.COMMA;     }
 
@@ -116,6 +117,11 @@ STR_CONST="{" ( [^\{\}]*  [^\\] )? "}"
 <YYINITIAL> "-<"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;        }
 <YYINITIAL> ">-"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;        }
 <YYINITIAL> "??"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;        }
+
+//<YYINITIAL> "?"                                             { yybegin(YYINITIAL); return ActTokenTypes.QUESTION;   }
+//<YYINITIAL> ":::"                                           { yybegin(YYINITIAL); return ActTokenTypes.COLON3;     }
+//<YYINITIAL> "::"                                            { yybegin(YYINITIAL); return ActTokenTypes.COLON2;     }
+//<YYINITIAL> ":"                                             { yybegin(YYINITIAL); return ActTokenTypes.COLON;      }
 
 
 <YYINITIAL> {WORD}                                          { yybegin(YYINITIAL); return ActTokenTypes.WORD;     }

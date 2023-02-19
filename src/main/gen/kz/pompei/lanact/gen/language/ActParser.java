@@ -36,12 +36,13 @@ public class ActParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // COMMENT* definition_top
+  // COMMENT* part_import* definition_top
   static boolean actFile(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "actFile")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = actFile_0(b, l + 1);
+    r = r && actFile_1(b, l + 1);
     r = r && definition_top(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
@@ -54,6 +55,17 @@ public class ActParser implements PsiParser, LightPsiParser {
       int c = current_position_(b);
       if (!consumeToken(b, COMMENT)) break;
       if (!empty_element_parsed_guard_(b, "actFile_0", c)) break;
+    }
+    return true;
+  }
+
+  // part_import*
+  private static boolean actFile_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "actFile_1")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!part_import(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "actFile_1", c)) break;
     }
     return true;
   }
@@ -536,6 +548,21 @@ public class ActParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, FINALLY);
     r = r && statements(b, l + 1);
     exit_section_(b, m, PART_FINALLY, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // IMPORT id ASSIGN expr
+  public static boolean part_import(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "part_import")) return false;
+    if (!nextTokenIs(b, IMPORT)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, IMPORT);
+    r = r && id(b, l + 1);
+    r = r && consumeToken(b, ASSIGN);
+    r = r && expr(b, l + 1);
+    exit_section_(b, m, PART_IMPORT, r);
     return r;
   }
 

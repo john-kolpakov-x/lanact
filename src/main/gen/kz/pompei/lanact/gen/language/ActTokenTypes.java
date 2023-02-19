@@ -28,6 +28,7 @@ public interface ActTokenTypes {
   IElementType OPERATION_2 = new ActElementType("OPERATION_2");
   IElementType PART_CATCH = new ActElementType("PART_CATCH");
   IElementType PART_FINALLY = new ActElementType("PART_FINALLY");
+  IElementType PART_IMPORT = new ActElementType("PART_IMPORT");
   IElementType STATEMENT_DO_DONE = new ActElementType("STATEMENT_DO_DONE");
   IElementType STATEMENT_ELSE = new ActElementType("STATEMENT_ELSE");
   IElementType STATEMENT_ELSE_IF = new ActElementType("STATEMENT_ELSE_IF");
@@ -48,6 +49,7 @@ public interface ActTokenTypes {
   IElementType FINALLY = new ActTokenType("FINALLY");
   IElementType FUN = new ActTokenType("FUN");
   IElementType IF = new ActTokenType("IF");
+  IElementType IMPORT = new ActTokenType("IMPORT");
   IElementType INTERFACE = new ActTokenType("INTERFACE");
   IElementType LET = new ActTokenType("LET");
   IElementType NIL = new ActTokenType("NIL");
@@ -123,6 +125,9 @@ public interface ActTokenTypes {
       }
       else if (type == PART_FINALLY) {
         return new ActPartFinallyImpl(node);
+      }
+      else if (type == PART_IMPORT) {
+        return new ActPartImportImpl(node);
       }
       else if (type == STATEMENT_DO_DONE) {
         return new ActStatementDoDoneImpl(node);

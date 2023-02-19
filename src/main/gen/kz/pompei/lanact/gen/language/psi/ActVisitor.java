@@ -79,6 +79,10 @@ public class ActVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitPartImport(@NotNull ActPartImport o) {
+    visitPsiElement(o);
+  }
+
   public void visitStatementDoDone(@NotNull ActStatementDoDone o) {
     visitPsiElement(o);
   }

@@ -15,7 +15,9 @@
 
 }
 
-actFile ::= COMMENT* definition_top
+actFile ::= COMMENT* part_import* definition_top
+
+part_import ::= IMPORT id ASSIGN expr
 
 private definition_top ::= definition_class | definition_interface
 
@@ -71,7 +73,6 @@ expr_call ::= id cortege?
 expr_paren  ::= PAR_OPEN expr PAR_CLOSE
 expr_square ::=  SQ_OPEN expr SQ_CLOSE
 private expr_const ::= NUMBER | YES | NO | NIL | STR_CONST
-
 
 expr_op2 ::= expr_op1 (operation2 expr_dot)*
 
