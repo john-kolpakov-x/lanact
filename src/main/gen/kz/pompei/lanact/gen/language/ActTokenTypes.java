@@ -20,7 +20,6 @@ public interface ActTokenTypes {
   IElementType DEFINITION_FUN = new ActElementType("DEFINITION_FUN");
   IElementType DEFINITION_INTERFACE = new ActElementType("DEFINITION_INTERFACE");
   IElementType DEFINITION_OPERATOR = new ActElementType("DEFINITION_OPERATOR");
-  IElementType DO_DONE_LAST = new ActElementType("DO_DONE_LAST");
   IElementType EXPR_CALL = new ActElementType("EXPR_CALL");
   IElementType EXPR_CONVERT_DOT = new ActElementType("EXPR_CONVERT_DOT");
   IElementType EXPR_CONVERT_OP_1 = new ActElementType("EXPR_CONVERT_OP_1");
@@ -124,9 +123,6 @@ public interface ActTokenTypes {
       }
       else if (type == DEFINITION_OPERATOR) {
         return new ActDefinitionOperatorImpl(node);
-      }
-      else if (type == DO_DONE_LAST) {
-        return new ActDoDoneLastImpl(node);
       }
       else if (type == EXPR_CALL) {
         return new ActExprCallImpl(node);

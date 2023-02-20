@@ -654,41 +654,6 @@ public class ActParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // part_catch+ part_finally?
-  public static boolean do_done_last(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "do_done_last")) return false;
-    if (!nextTokenIs(b, CATCH)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = do_done_last_0(b, l + 1);
-    r = r && do_done_last_1(b, l + 1);
-    exit_section_(b, m, DO_DONE_LAST, r);
-    return r;
-  }
-
-  // part_catch+
-  private static boolean do_done_last_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "do_done_last_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = part_catch(b, l + 1);
-    while (r) {
-      int c = current_position_(b);
-      if (!part_catch(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "do_done_last_0", c)) break;
-    }
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // part_finally?
-  private static boolean do_done_last_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "do_done_last_1")) return false;
-    part_finally(b, l + 1);
-    return true;
-  }
-
-  /* ********************************************************** */
   // expr_select
   static boolean expr(PsiBuilder b, int l) {
     return expr_select(b, l + 1);
@@ -1190,7 +1155,7 @@ public class ActParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // DO statements do_done_last? DONE
+  // DO statements part_catch* part_finally? DONE
   public static boolean statement_do_done(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "statement_do_done")) return false;
     if (!nextTokenIs(b, DO)) return false;
@@ -1199,15 +1164,27 @@ public class ActParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, DO);
     r = r && statements(b, l + 1);
     r = r && statement_do_done_2(b, l + 1);
+    r = r && statement_do_done_3(b, l + 1);
     r = r && consumeToken(b, DONE);
     exit_section_(b, m, STATEMENT_DO_DONE, r);
     return r;
   }
 
-  // do_done_last?
+  // part_catch*
   private static boolean statement_do_done_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "statement_do_done_2")) return false;
-    do_done_last(b, l + 1);
+    while (true) {
+      int c = current_position_(b);
+      if (!part_catch(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "statement_do_done_2", c)) break;
+    }
+    return true;
+  }
+
+  // part_finally?
+  private static boolean statement_do_done_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "statement_do_done_3")) return false;
+    part_finally(b, l + 1);
     return true;
   }
 

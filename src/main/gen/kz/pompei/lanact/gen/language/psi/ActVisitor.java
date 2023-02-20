@@ -47,10 +47,6 @@ public class ActVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitDoDoneLast(@NotNull ActDoDoneLast o) {
-    visitPsiElement(o);
-  }
-
   public void visitExprCall(@NotNull ActExprCall o) {
     visitPsiElement(o);
   }

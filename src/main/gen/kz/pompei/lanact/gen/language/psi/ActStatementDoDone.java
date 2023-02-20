@@ -7,8 +7,11 @@ import com.intellij.psi.PsiElement;
 
 public interface ActStatementDoDone extends PsiElement {
 
+  @NotNull
+  List<ActPartCatch> getPartCatchList();
+
   @Nullable
-  ActDoDoneLast getDoDoneLast();
+  ActPartFinally getPartFinally();
 
   @NotNull
   List<ActStatementDoDone> getStatementDoDoneList();

@@ -21,5 +21,10 @@
 
     <lang.parserDefinition language="Act"
                            implementationClass="kz.pompei.lanact.parser.ActParserDefinition"/>
+
+    <lang.syntaxHighlighterFactory
+      language="Act"
+      implementationClass="kz.pompei.lanact.highlight.ActSyntaxHighlighterFactory"/>
+
   </extensions>
 </idea-plugin>
