@@ -11,14 +11,14 @@ import static kz.pompei.lanact.gen.language.ActTokenTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import kz.pompei.lanact.gen.language.psi.*;
 
-public class ActPartFinallyImpl extends ASTWrapperPsiElement implements ActPartFinally {
+public class ActEndFinallyImpl extends ASTWrapperPsiElement implements ActEndFinally {
 
-  public ActPartFinallyImpl(@NotNull ASTNode node) {
+  public ActEndFinallyImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull ActVisitor visitor) {
-    visitor.visitPartFinally(this);
+    visitor.visitEndFinally(this);
   }
 
   @Override

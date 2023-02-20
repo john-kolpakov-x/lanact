@@ -20,6 +20,9 @@ public interface ActTokenTypes {
   IElementType DEFINITION_FUN = new ActElementType("DEFINITION_FUN");
   IElementType DEFINITION_INTERFACE = new ActElementType("DEFINITION_INTERFACE");
   IElementType DEFINITION_OPERATOR = new ActElementType("DEFINITION_OPERATOR");
+  IElementType END_CATCH = new ActElementType("END_CATCH");
+  IElementType END_CATCH_ARG = new ActElementType("END_CATCH_ARG");
+  IElementType END_FINALLY = new ActElementType("END_FINALLY");
   IElementType EXPR_CALL = new ActElementType("EXPR_CALL");
   IElementType EXPR_CONVERT_DOT = new ActElementType("EXPR_CONVERT_DOT");
   IElementType EXPR_CONVERT_OP_1 = new ActElementType("EXPR_CONVERT_OP_1");
@@ -34,8 +37,6 @@ public interface ActTokenTypes {
   IElementType OPERATION_2 = new ActElementType("OPERATION_2");
   IElementType OPERATION_NAME = new ActElementType("OPERATION_NAME");
   IElementType OPERATION_SQ_NAME = new ActElementType("OPERATION_SQ_NAME");
-  IElementType PART_CATCH = new ActElementType("PART_CATCH");
-  IElementType PART_FINALLY = new ActElementType("PART_FINALLY");
   IElementType PART_IMPORT = new ActElementType("PART_IMPORT");
   IElementType STATEMENT_DO_DONE = new ActElementType("STATEMENT_DO_DONE");
   IElementType STATEMENT_ELSE = new ActElementType("STATEMENT_ELSE");
@@ -124,6 +125,15 @@ public interface ActTokenTypes {
       else if (type == DEFINITION_OPERATOR) {
         return new ActDefinitionOperatorImpl(node);
       }
+      else if (type == END_CATCH) {
+        return new ActEndCatchImpl(node);
+      }
+      else if (type == END_CATCH_ARG) {
+        return new ActEndCatchArgImpl(node);
+      }
+      else if (type == END_FINALLY) {
+        return new ActEndFinallyImpl(node);
+      }
       else if (type == EXPR_CALL) {
         return new ActExprCallImpl(node);
       }
@@ -165,12 +175,6 @@ public interface ActTokenTypes {
       }
       else if (type == OPERATION_SQ_NAME) {
         return new ActOperationSqNameImpl(node);
-      }
-      else if (type == PART_CATCH) {
-        return new ActPartCatchImpl(node);
-      }
-      else if (type == PART_FINALLY) {
-        return new ActPartFinallyImpl(node);
       }
       else if (type == PART_IMPORT) {
         return new ActPartImportImpl(node);

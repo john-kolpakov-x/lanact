@@ -5,7 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface ActPartFinally extends PsiElement {
+public interface ActEndFinally extends PsiElement {
 
   @NotNull
   List<ActStatementDoDone> getStatementDoDoneList();

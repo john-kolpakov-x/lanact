@@ -39,12 +39,11 @@ operation_sq_name ::= SQ_OPEN SQ_CLOSE
 arg_def_cortege ::= PAR_OPEN (      id (COMMA id)* COLON type (ASSIGN expr)?
                              (COMMA id (COMMA id)* COLON type (ASSIGN expr)?)* COMMA?)? PAR_CLOSE
 
-statement_do_done ::= DO statements do_done_last? DONE
+statement_do_done ::= DO statements end_catch* end_finally? DONE
 
-do_done_last ::= part_catch+ part_finally?
-
-part_catch   ::= CATCH   statements
-part_finally ::= FINALLY statements
+end_catch     ::= CATCH end_catch_arg? statements
+end_finally   ::= FINALLY              statements
+end_catch_arg ::= PAR_OPEN id COLON type PAR_CLOSE
 
 private statements ::= statement*
 
@@ -55,7 +54,22 @@ statement_ret  ::= RET expr?
 
 assign_part ::= ASSIGN expr
 
-statement_if ::= IF expr statements statement_else_if* statement_else? END IF
+statement_if ::= IF expr
+                    statements
+                    end_catch*
+                    end_finally?
+                 statement_else_if*
+                 statement_else?
+                 END IF
+
+statement_else_if ::= ELSIF expr
+                            statements
+                            end_catch*
+                            end_finally?
+
+statement_else ::= ELSE statements
+                        end_catch*
+                        end_finally?
 
 annotation ::= DOG id cortege?
 
@@ -71,10 +85,6 @@ type_annotation ::= PERCENT id cortege?
 //
 
 expr_str ::= STR_LEFT expr (STR_INNER expr)* STR_RIGHT
-
-statement_else_if ::= ELSIF expr statements
-
-statement_else ::= ELSE statements
 
 private expr ::= expr_select
 

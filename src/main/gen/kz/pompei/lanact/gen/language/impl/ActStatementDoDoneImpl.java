@@ -29,14 +29,14 @@ public class ActStatementDoDoneImpl extends ASTWrapperPsiElement implements ActS
 
   @Override
   @NotNull
-  public List<ActPartCatch> getPartCatchList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActPartCatch.class);
+  public List<ActEndCatch> getEndCatchList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActEndCatch.class);
   }
 
   @Override
   @Nullable
-  public ActPartFinally getPartFinally() {
-    return findChildByClass(ActPartFinally.class);
+  public ActEndFinally getEndFinally() {
+    return findChildByClass(ActEndFinally.class);
   }
 
   @Override

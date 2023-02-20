@@ -29,6 +29,18 @@ public class ActStatementElseImpl extends ASTWrapperPsiElement implements ActSta
 
   @Override
   @NotNull
+  public List<ActEndCatch> getEndCatchList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActEndCatch.class);
+  }
+
+  @Override
+  @Nullable
+  public ActEndFinally getEndFinally() {
+    return findChildByClass(ActEndFinally.class);
+  }
+
+  @Override
+  @NotNull
   public List<ActStatementDoDone> getStatementDoDoneList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, ActStatementDoDone.class);
   }

@@ -654,6 +654,56 @@ public class ActParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // CATCH end_catch_arg? statements
+  public static boolean end_catch(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "end_catch")) return false;
+    if (!nextTokenIs(b, CATCH)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, CATCH);
+    r = r && end_catch_1(b, l + 1);
+    r = r && statements(b, l + 1);
+    exit_section_(b, m, END_CATCH, r);
+    return r;
+  }
+
+  // end_catch_arg?
+  private static boolean end_catch_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "end_catch_1")) return false;
+    end_catch_arg(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // PAR_OPEN id COLON type PAR_CLOSE
+  public static boolean end_catch_arg(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "end_catch_arg")) return false;
+    if (!nextTokenIs(b, PAR_OPEN)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, PAR_OPEN);
+    r = r && id(b, l + 1);
+    r = r && consumeToken(b, COLON);
+    r = r && type(b, l + 1);
+    r = r && consumeToken(b, PAR_CLOSE);
+    exit_section_(b, m, END_CATCH_ARG, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // FINALLY              statements
+  public static boolean end_finally(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "end_finally")) return false;
+    if (!nextTokenIs(b, FINALLY)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, FINALLY);
+    r = r && statements(b, l + 1);
+    exit_section_(b, m, END_FINALLY, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // expr_select
   static boolean expr(PsiBuilder b, int l) {
     return expr_select(b, l + 1);
@@ -1101,32 +1151,6 @@ public class ActParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // CATCH   statements
-  public static boolean part_catch(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "part_catch")) return false;
-    if (!nextTokenIs(b, CATCH)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, CATCH);
-    r = r && statements(b, l + 1);
-    exit_section_(b, m, PART_CATCH, r);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // FINALLY statements
-  public static boolean part_finally(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "part_finally")) return false;
-    if (!nextTokenIs(b, FINALLY)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, FINALLY);
-    r = r && statements(b, l + 1);
-    exit_section_(b, m, PART_FINALLY, r);
-    return r;
-  }
-
-  /* ********************************************************** */
   // IMPORT id ASSIGN expr
   public static boolean part_import(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "part_import")) return false;
@@ -1155,7 +1179,7 @@ public class ActParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // DO statements part_catch* part_finally? DONE
+  // DO statements end_catch* end_finally? DONE
   public static boolean statement_do_done(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "statement_do_done")) return false;
     if (!nextTokenIs(b, DO)) return false;
@@ -1170,26 +1194,28 @@ public class ActParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // part_catch*
+  // end_catch*
   private static boolean statement_do_done_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "statement_do_done_2")) return false;
     while (true) {
       int c = current_position_(b);
-      if (!part_catch(b, l + 1)) break;
+      if (!end_catch(b, l + 1)) break;
       if (!empty_element_parsed_guard_(b, "statement_do_done_2", c)) break;
     }
     return true;
   }
 
-  // part_finally?
+  // end_finally?
   private static boolean statement_do_done_3(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "statement_do_done_3")) return false;
-    part_finally(b, l + 1);
+    end_finally(b, l + 1);
     return true;
   }
 
   /* ********************************************************** */
   // ELSE statements
+  //                         end_catch*
+  //                         end_finally?
   public static boolean statement_else(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "statement_else")) return false;
     if (!nextTokenIs(b, ELSE)) return false;
@@ -1197,12 +1223,35 @@ public class ActParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b);
     r = consumeToken(b, ELSE);
     r = r && statements(b, l + 1);
+    r = r && statement_else_2(b, l + 1);
+    r = r && statement_else_3(b, l + 1);
     exit_section_(b, m, STATEMENT_ELSE, r);
     return r;
   }
 
+  // end_catch*
+  private static boolean statement_else_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "statement_else_2")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!end_catch(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "statement_else_2", c)) break;
+    }
+    return true;
+  }
+
+  // end_finally?
+  private static boolean statement_else_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "statement_else_3")) return false;
+    end_finally(b, l + 1);
+    return true;
+  }
+
   /* ********************************************************** */
-  // ELSIF expr statements
+  // ELSIF expr
+  //                             statements
+  //                             end_catch*
+  //                             end_finally?
   public static boolean statement_else_if(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "statement_else_if")) return false;
     if (!nextTokenIs(b, ELSIF)) return false;
@@ -1211,8 +1260,28 @@ public class ActParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, ELSIF);
     r = r && expr(b, l + 1);
     r = r && statements(b, l + 1);
+    r = r && statement_else_if_3(b, l + 1);
+    r = r && statement_else_if_4(b, l + 1);
     exit_section_(b, m, STATEMENT_ELSE_IF, r);
     return r;
+  }
+
+  // end_catch*
+  private static boolean statement_else_if_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "statement_else_if_3")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!end_catch(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "statement_else_if_3", c)) break;
+    }
+    return true;
+  }
+
+  // end_finally?
+  private static boolean statement_else_if_4(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "statement_else_if_4")) return false;
+    end_finally(b, l + 1);
+    return true;
   }
 
   /* ********************************************************** */
@@ -1237,7 +1306,13 @@ public class ActParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // IF expr statements statement_else_if* statement_else? END IF
+  // IF expr
+  //                     statements
+  //                     end_catch*
+  //                     end_finally?
+  //                  statement_else_if*
+  //                  statement_else?
+  //                  END IF
   public static boolean statement_if(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "statement_if")) return false;
     if (!nextTokenIs(b, IF)) return false;
@@ -1248,25 +1323,45 @@ public class ActParser implements PsiParser, LightPsiParser {
     r = r && statements(b, l + 1);
     r = r && statement_if_3(b, l + 1);
     r = r && statement_if_4(b, l + 1);
+    r = r && statement_if_5(b, l + 1);
+    r = r && statement_if_6(b, l + 1);
     r = r && consumeTokens(b, 0, END, IF);
     exit_section_(b, m, STATEMENT_IF, r);
     return r;
   }
 
-  // statement_else_if*
+  // end_catch*
   private static boolean statement_if_3(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "statement_if_3")) return false;
     while (true) {
       int c = current_position_(b);
-      if (!statement_else_if(b, l + 1)) break;
+      if (!end_catch(b, l + 1)) break;
       if (!empty_element_parsed_guard_(b, "statement_if_3", c)) break;
     }
     return true;
   }
 
-  // statement_else?
+  // end_finally?
   private static boolean statement_if_4(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "statement_if_4")) return false;
+    end_finally(b, l + 1);
+    return true;
+  }
+
+  // statement_else_if*
+  private static boolean statement_if_5(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "statement_if_5")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!statement_else_if(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "statement_if_5", c)) break;
+    }
+    return true;
+  }
+
+  // statement_else?
+  private static boolean statement_if_6(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "statement_if_6")) return false;
     statement_else(b, l + 1);
     return true;
   }

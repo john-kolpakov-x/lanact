@@ -11,20 +11,26 @@ import static kz.pompei.lanact.gen.language.ActTokenTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import kz.pompei.lanact.gen.language.psi.*;
 
-public class ActPartCatchImpl extends ASTWrapperPsiElement implements ActPartCatch {
+public class ActEndCatchImpl extends ASTWrapperPsiElement implements ActEndCatch {
 
-  public ActPartCatchImpl(@NotNull ASTNode node) {
+  public ActEndCatchImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull ActVisitor visitor) {
-    visitor.visitPartCatch(this);
+    visitor.visitEndCatch(this);
   }
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof ActVisitor) accept((ActVisitor)visitor);
     else super.accept(visitor);
+  }
+
+  @Override
+  @Nullable
+  public ActEndCatchArg getEndCatchArg() {
+    return findChildByClass(ActEndCatchArg.class);
   }
 
   @Override

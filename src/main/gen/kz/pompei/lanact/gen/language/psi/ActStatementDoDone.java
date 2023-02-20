@@ -8,10 +8,10 @@ import com.intellij.psi.PsiElement;
 public interface ActStatementDoDone extends PsiElement {
 
   @NotNull
-  List<ActPartCatch> getPartCatchList();
+  List<ActEndCatch> getEndCatchList();
 
   @Nullable
-  ActPartFinally getPartFinally();
+  ActEndFinally getEndFinally();
 
   @NotNull
   List<ActStatementDoDone> getStatementDoDoneList();

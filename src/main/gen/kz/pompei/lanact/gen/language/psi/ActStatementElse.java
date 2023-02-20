@@ -8,6 +8,12 @@ import com.intellij.psi.PsiElement;
 public interface ActStatementElse extends PsiElement {
 
   @NotNull
+  List<ActEndCatch> getEndCatchList();
+
+  @Nullable
+  ActEndFinally getEndFinally();
+
+  @NotNull
   List<ActStatementDoDone> getStatementDoDoneList();
 
   @NotNull

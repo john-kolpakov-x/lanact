@@ -47,6 +47,18 @@ public class ActVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitEndCatch(@NotNull ActEndCatch o) {
+    visitPsiElement(o);
+  }
+
+  public void visitEndCatchArg(@NotNull ActEndCatchArg o) {
+    visitPsiElement(o);
+  }
+
+  public void visitEndFinally(@NotNull ActEndFinally o) {
+    visitPsiElement(o);
+  }
+
   public void visitExprCall(@NotNull ActExprCall o) {
     visitPsiElement(o);
   }
@@ -100,14 +112,6 @@ public class ActVisitor extends PsiElementVisitor {
   }
 
   public void visitOperationSqName(@NotNull ActOperationSqName o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPartCatch(@NotNull ActPartCatch o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPartFinally(@NotNull ActPartFinally o) {
     visitPsiElement(o);
   }
 

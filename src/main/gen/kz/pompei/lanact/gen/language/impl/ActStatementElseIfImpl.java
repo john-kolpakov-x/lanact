@@ -29,6 +29,18 @@ public class ActStatementElseIfImpl extends ASTWrapperPsiElement implements ActS
 
   @Override
   @NotNull
+  public List<ActEndCatch> getEndCatchList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActEndCatch.class);
+  }
+
+  @Override
+  @Nullable
+  public ActEndFinally getEndFinally() {
+    return findChildByClass(ActEndFinally.class);
+  }
+
+  @Override
+  @NotNull
   public ActExprSelect getExprSelect() {
     return findNotNullChildByClass(ActExprSelect.class);
   }

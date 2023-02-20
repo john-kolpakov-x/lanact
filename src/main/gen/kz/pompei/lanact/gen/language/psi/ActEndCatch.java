@@ -5,7 +5,10 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface ActPartCatch extends PsiElement {
+public interface ActEndCatch extends PsiElement {
+
+  @Nullable
+  ActEndCatchArg getEndCatchArg();
 
   @NotNull
   List<ActStatementDoDone> getStatementDoDoneList();
