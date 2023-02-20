@@ -14,10 +14,12 @@ public interface ActTokenTypes {
   IElementType ARG_DEF_CORTEGE = new ActElementType("ARG_DEF_CORTEGE");
   IElementType ASSIGN_PART = new ActElementType("ASSIGN_PART");
   IElementType CORTEGE = new ActElementType("CORTEGE");
+  IElementType CORTEGE_SQ = new ActElementType("CORTEGE_SQ");
   IElementType DEFINITION = new ActElementType("DEFINITION");
   IElementType DEFINITION_CLASS = new ActElementType("DEFINITION_CLASS");
   IElementType DEFINITION_FUN = new ActElementType("DEFINITION_FUN");
   IElementType DEFINITION_INTERFACE = new ActElementType("DEFINITION_INTERFACE");
+  IElementType DEFINITION_OPERATOR = new ActElementType("DEFINITION_OPERATOR");
   IElementType DO_DONE_LAST = new ActElementType("DO_DONE_LAST");
   IElementType EXPR_CALL = new ActElementType("EXPR_CALL");
   IElementType EXPR_DOT = new ActElementType("EXPR_DOT");
@@ -28,6 +30,8 @@ public interface ActTokenTypes {
   IElementType ID = new ActElementType("ID");
   IElementType OPERATION_1 = new ActElementType("OPERATION_1");
   IElementType OPERATION_2 = new ActElementType("OPERATION_2");
+  IElementType OPERATION_NAME = new ActElementType("OPERATION_NAME");
+  IElementType OPERATION_SQ_NAME = new ActElementType("OPERATION_SQ_NAME");
   IElementType PART_CATCH = new ActElementType("PART_CATCH");
   IElementType PART_FINALLY = new ActElementType("PART_FINALLY");
   IElementType PART_IMPORT = new ActElementType("PART_IMPORT");
@@ -39,6 +43,7 @@ public interface ActTokenTypes {
   IElementType STATEMENT_RET = new ActElementType("STATEMENT_RET");
   IElementType STATEMENT_VAR_DEF = new ActElementType("STATEMENT_VAR_DEF");
   IElementType TYPE = new ActElementType("TYPE");
+  IElementType TYPE_1 = new ActElementType("TYPE_1");
   IElementType TYPE_ANNOTATION = new ActElementType("TYPE_ANNOTATION");
 
   IElementType ASSIGN = new ActTokenType("ASSIGN");
@@ -61,15 +66,16 @@ public interface ActTokenTypes {
   IElementType IMPORT = new ActTokenType("IMPORT");
   IElementType INTERFACE = new ActTokenType("INTERFACE");
   IElementType LET = new ActTokenType("LET");
-  IElementType NIL = new ActTokenType("NIL");
   IElementType NO = new ActTokenType("NO");
   IElementType NUMBER = new ActTokenType("NUMBER");
   IElementType OP1 = new ActTokenType("OP1");
   IElementType OP12 = new ActTokenType("OP12");
   IElementType OP2 = new ActTokenType("OP2");
+  IElementType OPERATOR = new ActTokenType("OPERATOR");
   IElementType PAR_CLOSE = new ActTokenType("PAR_CLOSE");
   IElementType PAR_OPEN = new ActTokenType("PAR_OPEN");
   IElementType PERCENT = new ActTokenType("PERCENT");
+  IElementType PIPE = new ActTokenType("PIPE");
   IElementType RET = new ActTokenType("RET");
   IElementType RIGHT_ARROW = new ActTokenType("RIGHT_ARROW");
   IElementType SQ_CLOSE = new ActTokenType("SQ_CLOSE");
@@ -96,6 +102,9 @@ public interface ActTokenTypes {
       else if (type == CORTEGE) {
         return new ActCortegeImpl(node);
       }
+      else if (type == CORTEGE_SQ) {
+        return new ActCortegeSqImpl(node);
+      }
       else if (type == DEFINITION) {
         return new ActDefinitionImpl(node);
       }
@@ -107,6 +116,9 @@ public interface ActTokenTypes {
       }
       else if (type == DEFINITION_INTERFACE) {
         return new ActDefinitionInterfaceImpl(node);
+      }
+      else if (type == DEFINITION_OPERATOR) {
+        return new ActDefinitionOperatorImpl(node);
       }
       else if (type == DO_DONE_LAST) {
         return new ActDoDoneLastImpl(node);
@@ -137,6 +149,12 @@ public interface ActTokenTypes {
       }
       else if (type == OPERATION_2) {
         return new ActOperation2Impl(node);
+      }
+      else if (type == OPERATION_NAME) {
+        return new ActOperationNameImpl(node);
+      }
+      else if (type == OPERATION_SQ_NAME) {
+        return new ActOperationSqNameImpl(node);
       }
       else if (type == PART_CATCH) {
         return new ActPartCatchImpl(node);
@@ -170,6 +188,9 @@ public interface ActTokenTypes {
       }
       else if (type == TYPE) {
         return new ActTypeImpl(node);
+      }
+      else if (type == TYPE_1) {
+        return new ActType1Impl(node);
       }
       else if (type == TYPE_ANNOTATION) {
         return new ActTypeAnnotationImpl(node);

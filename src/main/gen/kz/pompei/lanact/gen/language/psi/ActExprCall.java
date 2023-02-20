@@ -10,6 +10,9 @@ public interface ActExprCall extends PsiElement {
   @Nullable
   ActCortege getCortege();
 
+  @Nullable
+  ActCortegeSq getCortegeSq();
+
   @NotNull
   ActId getId();
 

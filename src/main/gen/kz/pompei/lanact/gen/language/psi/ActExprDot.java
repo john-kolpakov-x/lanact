@@ -10,6 +10,9 @@ public interface ActExprDot extends PsiElement {
   @NotNull
   List<ActCortege> getCortegeList();
 
+  @NotNull
+  List<ActCortegeSq> getCortegeSqList();
+
   @Nullable
   ActExprCall getExprCall();
 

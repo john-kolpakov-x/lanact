@@ -320,14 +320,88 @@ public class ActParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // definition_fun
-  public static boolean definition(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "definition")) return false;
-    if (!nextTokenIs(b, FUN)) return false;
+  // cortege | cortege_sq
+  static boolean cortege_any(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "cortege_any")) return false;
+    if (!nextTokenIs(b, "", PAR_OPEN, SQ_OPEN)) return false;
+    boolean r;
+    r = cortege(b, l + 1);
+    if (!r) r = cortege_sq(b, l + 1);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // SQ_OPEN (expr (COMMA expr)* COMMA?)?  SQ_CLOSE
+  public static boolean cortege_sq(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "cortege_sq")) return false;
+    if (!nextTokenIs(b, SQ_OPEN)) return false;
     boolean r;
     Marker m = enter_section_(b);
+    r = consumeToken(b, SQ_OPEN);
+    r = r && cortege_sq_1(b, l + 1);
+    r = r && consumeToken(b, SQ_CLOSE);
+    exit_section_(b, m, CORTEGE_SQ, r);
+    return r;
+  }
+
+  // (expr (COMMA expr)* COMMA?)?
+  private static boolean cortege_sq_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "cortege_sq_1")) return false;
+    cortege_sq_1_0(b, l + 1);
+    return true;
+  }
+
+  // expr (COMMA expr)* COMMA?
+  private static boolean cortege_sq_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "cortege_sq_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = expr(b, l + 1);
+    r = r && cortege_sq_1_0_1(b, l + 1);
+    r = r && cortege_sq_1_0_2(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // (COMMA expr)*
+  private static boolean cortege_sq_1_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "cortege_sq_1_0_1")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!cortege_sq_1_0_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "cortege_sq_1_0_1", c)) break;
+    }
+    return true;
+  }
+
+  // COMMA expr
+  private static boolean cortege_sq_1_0_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "cortege_sq_1_0_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, COMMA);
+    r = r && expr(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // COMMA?
+  private static boolean cortege_sq_1_0_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "cortege_sq_1_0_2")) return false;
+    consumeToken(b, COMMA);
+    return true;
+  }
+
+  /* ********************************************************** */
+  // definition_fun | definition_operator
+  public static boolean definition(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "definition")) return false;
+    if (!nextTokenIs(b, "<definition>", FUN, OPERATOR)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, DEFINITION, "<definition>");
     r = definition_fun(b, l + 1);
-    exit_section_(b, m, DEFINITION, r);
+    if (!r) r = definition_operator(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -492,6 +566,83 @@ public class ActParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // OPERATOR operation_name arg_def_cortege ((RIGHT_ARROW type) | (ASSIGN id COLON type))? annotation* statement_do_done?
+  public static boolean definition_operator(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "definition_operator")) return false;
+    if (!nextTokenIs(b, OPERATOR)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, OPERATOR);
+    r = r && operation_name(b, l + 1);
+    r = r && arg_def_cortege(b, l + 1);
+    r = r && definition_operator_3(b, l + 1);
+    r = r && definition_operator_4(b, l + 1);
+    r = r && definition_operator_5(b, l + 1);
+    exit_section_(b, m, DEFINITION_OPERATOR, r);
+    return r;
+  }
+
+  // ((RIGHT_ARROW type) | (ASSIGN id COLON type))?
+  private static boolean definition_operator_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "definition_operator_3")) return false;
+    definition_operator_3_0(b, l + 1);
+    return true;
+  }
+
+  // (RIGHT_ARROW type) | (ASSIGN id COLON type)
+  private static boolean definition_operator_3_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "definition_operator_3_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = definition_operator_3_0_0(b, l + 1);
+    if (!r) r = definition_operator_3_0_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // RIGHT_ARROW type
+  private static boolean definition_operator_3_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "definition_operator_3_0_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, RIGHT_ARROW);
+    r = r && type(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // ASSIGN id COLON type
+  private static boolean definition_operator_3_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "definition_operator_3_0_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, ASSIGN);
+    r = r && id(b, l + 1);
+    r = r && consumeToken(b, COLON);
+    r = r && type(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // annotation*
+  private static boolean definition_operator_4(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "definition_operator_4")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!annotation(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "definition_operator_4", c)) break;
+    }
+    return true;
+  }
+
+  // statement_do_done?
+  private static boolean definition_operator_5(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "definition_operator_5")) return false;
+    statement_do_done(b, l + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
   // definition_class | definition_interface
   static boolean definition_top(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "definition_top")) return false;
@@ -544,7 +695,7 @@ public class ActParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // id cortege?
+  // id cortege_any?
   public static boolean expr_call(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "expr_call")) return false;
     if (!nextTokenIs(b, WORD)) return false;
@@ -556,28 +707,27 @@ public class ActParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // cortege?
+  // cortege_any?
   private static boolean expr_call_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "expr_call_1")) return false;
-    cortege(b, l + 1);
+    cortege_any(b, l + 1);
     return true;
   }
 
   /* ********************************************************** */
-  // NUMBER | YES | NO | NIL | STR_CONST
+  // NUMBER | YES | NO | STR_CONST
   static boolean expr_const(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "expr_const")) return false;
     boolean r;
     r = consumeToken(b, NUMBER);
     if (!r) r = consumeToken(b, YES);
     if (!r) r = consumeToken(b, NO);
-    if (!r) r = consumeToken(b, NIL);
     if (!r) r = consumeToken(b, STR_CONST);
     return r;
   }
 
   /* ********************************************************** */
-  // expr_single (DOT id cortege?)*
+  // expr_single (DOT id cortege_any?)*
   public static boolean expr_dot(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "expr_dot")) return false;
     boolean r;
@@ -588,7 +738,7 @@ public class ActParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // (DOT id cortege?)*
+  // (DOT id cortege_any?)*
   private static boolean expr_dot_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "expr_dot_1")) return false;
     while (true) {
@@ -599,7 +749,7 @@ public class ActParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // DOT id cortege?
+  // DOT id cortege_any?
   private static boolean expr_dot_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "expr_dot_1_0")) return false;
     boolean r;
@@ -611,10 +761,10 @@ public class ActParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // cortege?
+  // cortege_any?
   private static boolean expr_dot_1_0_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "expr_dot_1_0_2")) return false;
-    cortege(b, l + 1);
+    cortege_any(b, l + 1);
     return true;
   }
 
@@ -809,6 +959,32 @@ public class ActParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // OP1 | OP2 | OP12 | operation_sq_name
+  public static boolean operation_name(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "operation_name")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, OPERATION_NAME, "<operation name>");
+    r = consumeToken(b, OP1);
+    if (!r) r = consumeToken(b, OP2);
+    if (!r) r = consumeToken(b, OP12);
+    if (!r) r = operation_sq_name(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // SQ_OPEN SQ_CLOSE
+  public static boolean operation_sq_name(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "operation_sq_name")) return false;
+    if (!nextTokenIs(b, SQ_OPEN)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeTokens(b, 0, SQ_OPEN, SQ_CLOSE);
+    exit_section_(b, m, OPERATION_SQ_NAME, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // CATCH   statements
   public static boolean part_catch(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "part_catch")) return false;
@@ -968,7 +1144,7 @@ public class ActParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // RET expr*
+  // RET expr?
   public static boolean statement_ret(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "statement_ret")) return false;
     if (!nextTokenIs(b, RET)) return false;
@@ -980,14 +1156,10 @@ public class ActParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // expr*
+  // expr?
   private static boolean statement_ret_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "statement_ret_1")) return false;
-    while (true) {
-      int c = current_position_(b);
-      if (!expr(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "statement_ret_1", c)) break;
-    }
+    expr(b, l + 1);
     return true;
   }
 
@@ -1046,37 +1218,72 @@ public class ActParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // CEIL* id type_annotation*
+  // type1 (PIPE type1)*
   public static boolean type(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "type")) return false;
     if (!nextTokenIs(b, "<type>", CEIL, WORD)) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, TYPE, "<type>");
-    r = type_0(b, l + 1);
+    r = type1(b, l + 1);
+    r = r && type_1(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // (PIPE type1)*
+  private static boolean type_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "type_1")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!type_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "type_1", c)) break;
+    }
+    return true;
+  }
+
+  // PIPE type1
+  private static boolean type_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "type_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, PIPE);
+    r = r && type1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // CEIL* id type_annotation*
+  public static boolean type1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "type1")) return false;
+    if (!nextTokenIs(b, "<type 1>", CEIL, WORD)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, TYPE_1, "<type 1>");
+    r = type1_0(b, l + 1);
     r = r && id(b, l + 1);
-    r = r && type_2(b, l + 1);
+    r = r && type1_2(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
   // CEIL*
-  private static boolean type_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "type_0")) return false;
+  private static boolean type1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "type1_0")) return false;
     while (true) {
       int c = current_position_(b);
       if (!consumeToken(b, CEIL)) break;
-      if (!empty_element_parsed_guard_(b, "type_0", c)) break;
+      if (!empty_element_parsed_guard_(b, "type1_0", c)) break;
     }
     return true;
   }
 
   // type_annotation*
-  private static boolean type_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "type_2")) return false;
+  private static boolean type1_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "type1_2")) return false;
     while (true) {
       int c = current_position_(b);
       if (!type_annotation(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "type_2", c)) break;
+      if (!empty_element_parsed_guard_(b, "type1_2", c)) break;
     }
     return true;
   }

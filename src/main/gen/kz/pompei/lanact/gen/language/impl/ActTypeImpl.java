@@ -29,14 +29,8 @@ public class ActTypeImpl extends ASTWrapperPsiElement implements ActType {
 
   @Override
   @NotNull
-  public ActId getId() {
-    return findNotNullChildByClass(ActId.class);
-  }
-
-  @Override
-  @NotNull
-  public List<ActTypeAnnotation> getTypeAnnotationList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActTypeAnnotation.class);
+  public List<ActType1> getType1List() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActType1.class);
   }
 
 }

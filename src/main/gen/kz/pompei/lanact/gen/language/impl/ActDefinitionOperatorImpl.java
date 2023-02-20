@@ -11,14 +11,14 @@ import static kz.pompei.lanact.gen.language.ActTokenTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import kz.pompei.lanact.gen.language.psi.*;
 
-public class ActExprDotImpl extends ASTWrapperPsiElement implements ActExprDot {
+public class ActDefinitionOperatorImpl extends ASTWrapperPsiElement implements ActDefinitionOperator {
 
-  public ActExprDotImpl(@NotNull ASTNode node) {
+  public ActDefinitionOperatorImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull ActVisitor visitor) {
-    visitor.visitExprDot(this);
+    visitor.visitDefinitionOperator(this);
   }
 
   @Override
@@ -29,44 +29,38 @@ public class ActExprDotImpl extends ASTWrapperPsiElement implements ActExprDot {
 
   @Override
   @NotNull
-  public List<ActCortege> getCortegeList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActCortege.class);
+  public List<ActAnnotation> getAnnotationList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActAnnotation.class);
   }
 
   @Override
   @NotNull
-  public List<ActCortegeSq> getCortegeSqList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActCortegeSq.class);
+  public ActArgDefCortege getArgDefCortege() {
+    return findNotNullChildByClass(ActArgDefCortege.class);
   }
 
   @Override
   @Nullable
-  public ActExprCall getExprCall() {
-    return findChildByClass(ActExprCall.class);
-  }
-
-  @Override
-  @Nullable
-  public ActExprParen getExprParen() {
-    return findChildByClass(ActExprParen.class);
-  }
-
-  @Override
-  @Nullable
-  public ActExprSquare getExprSquare() {
-    return findChildByClass(ActExprSquare.class);
-  }
-
-  @Override
-  @Nullable
-  public ActExprStr getExprStr() {
-    return findChildByClass(ActExprStr.class);
+  public ActId getId() {
+    return findChildByClass(ActId.class);
   }
 
   @Override
   @NotNull
-  public List<ActId> getIdList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActId.class);
+  public ActOperationName getOperationName() {
+    return findNotNullChildByClass(ActOperationName.class);
+  }
+
+  @Override
+  @Nullable
+  public ActStatementDoDone getStatementDoDone() {
+    return findChildByClass(ActStatementDoDone.class);
+  }
+
+  @Override
+  @Nullable
+  public ActType getType() {
+    return findChildByClass(ActType.class);
   }
 
 }

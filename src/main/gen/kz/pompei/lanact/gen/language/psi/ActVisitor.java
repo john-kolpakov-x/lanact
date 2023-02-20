@@ -23,6 +23,10 @@ public class ActVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitCortegeSq(@NotNull ActCortegeSq o) {
+    visitPsiElement(o);
+  }
+
   public void visitDefinition(@NotNull ActDefinition o) {
     visitPsiElement(o);
   }
@@ -36,6 +40,10 @@ public class ActVisitor extends PsiElementVisitor {
   }
 
   public void visitDefinitionInterface(@NotNull ActDefinitionInterface o) {
+    visitPsiElement(o);
+  }
+
+  public void visitDefinitionOperator(@NotNull ActDefinitionOperator o) {
     visitPsiElement(o);
   }
 
@@ -76,6 +84,14 @@ public class ActVisitor extends PsiElementVisitor {
   }
 
   public void visitOperation2(@NotNull ActOperation2 o) {
+    visitPsiElement(o);
+  }
+
+  public void visitOperationName(@NotNull ActOperationName o) {
+    visitPsiElement(o);
+  }
+
+  public void visitOperationSqName(@NotNull ActOperationSqName o) {
     visitPsiElement(o);
   }
 
@@ -120,6 +136,10 @@ public class ActVisitor extends PsiElementVisitor {
   }
 
   public void visitType(@NotNull ActType o) {
+    visitPsiElement(o);
+  }
+
+  public void visitType1(@NotNull ActType1 o) {
     visitPsiElement(o);
   }
 

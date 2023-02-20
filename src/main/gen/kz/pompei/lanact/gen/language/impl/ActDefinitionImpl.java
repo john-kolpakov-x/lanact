@@ -28,9 +28,15 @@ public class ActDefinitionImpl extends ASTWrapperPsiElement implements ActDefini
   }
 
   @Override
-  @NotNull
+  @Nullable
   public ActDefinitionFun getDefinitionFun() {
-    return findNotNullChildByClass(ActDefinitionFun.class);
+    return findChildByClass(ActDefinitionFun.class);
+  }
+
+  @Override
+  @Nullable
+  public ActDefinitionOperator getDefinitionOperator() {
+    return findChildByClass(ActDefinitionOperator.class);
   }
 
 }

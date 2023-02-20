@@ -11,14 +11,14 @@ import static kz.pompei.lanact.gen.language.ActTokenTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import kz.pompei.lanact.gen.language.psi.*;
 
-public class ActStatementRetImpl extends ASTWrapperPsiElement implements ActStatementRet {
+public class ActCortegeSqImpl extends ASTWrapperPsiElement implements ActCortegeSq {
 
-  public ActStatementRetImpl(@NotNull ASTNode node) {
+  public ActCortegeSqImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull ActVisitor visitor) {
-    visitor.visitStatementRet(this);
+    visitor.visitCortegeSq(this);
   }
 
   @Override
@@ -28,9 +28,9 @@ public class ActStatementRetImpl extends ASTWrapperPsiElement implements ActStat
   }
 
   @Override
-  @Nullable
-  public ActExprOp2 getExprOp2() {
-    return findChildByClass(ActExprOp2.class);
+  @NotNull
+  public List<ActExprOp2> getExprOp2List() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActExprOp2.class);
   }
 
 }

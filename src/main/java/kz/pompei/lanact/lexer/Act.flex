@@ -72,10 +72,10 @@ STR_CONST="{" ( [^\{\}]*  [^\\] )? "}"
 <YYINITIAL> "]"                                             { yybegin(YYINITIAL); return ActTokenTypes.SQ_CLOSE;    }
 <YYINITIAL> "<-"                                            { yybegin(YYINITIAL); return ActTokenTypes.ASSIGN;      }
 <YYINITIAL> "->"                                            { yybegin(YYINITIAL); return ActTokenTypes.RIGHT_ARROW; }
-<YYINITIAL> "nil"                                           { yybegin(YYINITIAL); return ActTokenTypes.NIL;         }
 <YYINITIAL> "fun"                                           { yybegin(YYINITIAL); return ActTokenTypes.FUN;         }
 <YYINITIAL> "import"                                        { yybegin(YYINITIAL); return ActTokenTypes.IMPORT;      }
 <YYINITIAL> "ret"                                           { yybegin(YYINITIAL); return ActTokenTypes.RET;         }
+<YYINITIAL> "operator"                                      { yybegin(YYINITIAL); return ActTokenTypes.OPERATOR;    }
 
 <YYINITIAL> "@"                                             { yybegin(YYINITIAL); return ActTokenTypes.DOG;         }
 <YYINITIAL> "%"                                             { yybegin(YYINITIAL); return ActTokenTypes.PERCENT;     }
@@ -123,6 +123,8 @@ STR_CONST="{" ( [^\{\}]*  [^\\] )? "}"
 <YYINITIAL> "-<"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
 <YYINITIAL> ">-"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
 <YYINITIAL> "??"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
+
+<YYINITIAL> "|"                                             { yybegin(YYINITIAL); return ActTokenTypes.PIPE;        }
 
 //<YYINITIAL> "?"                                             { yybegin(YYINITIAL); return ActTokenTypes.QUESTION;   }
 //<YYINITIAL> ":::"                                           { yybegin(YYINITIAL); return ActTokenTypes.COLON3;     }

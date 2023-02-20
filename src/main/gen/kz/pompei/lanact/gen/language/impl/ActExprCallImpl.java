@@ -34,6 +34,12 @@ public class ActExprCallImpl extends ASTWrapperPsiElement implements ActExprCall
   }
 
   @Override
+  @Nullable
+  public ActCortegeSq getCortegeSq() {
+    return findChildByClass(ActCortegeSq.class);
+  }
+
+  @Override
   @NotNull
   public ActId getId() {
     return findNotNullChildByClass(ActId.class);

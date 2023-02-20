@@ -7,7 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface ActStatementRet extends PsiElement {
 
-  @NotNull
-  List<ActExprOp2> getExprOp2List();
+  @Nullable
+  ActExprOp2 getExprOp2();
 
 }

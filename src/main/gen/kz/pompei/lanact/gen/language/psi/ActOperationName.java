@@ -5,12 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface ActDefinition extends PsiElement {
+public interface ActOperationName extends PsiElement {
 
   @Nullable
-  ActDefinitionFun getDefinitionFun();
-
-  @Nullable
-  ActDefinitionOperator getDefinitionOperator();
+  ActOperationSqName getOperationSqName();
 
 }

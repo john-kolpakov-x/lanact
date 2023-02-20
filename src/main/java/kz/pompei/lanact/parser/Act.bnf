@@ -27,9 +27,14 @@ definition_class ::= CLASS id annotation* definition* END CLASS
 
 definition_interface ::= INTERFACE id annotation* definition* END INTERFACE
 
-definition ::= definition_fun
+definition ::= definition_fun | definition_operator
 
 definition_fun ::= FUN id arg_def_cortege? ((RIGHT_ARROW type) | (ASSIGN id COLON type))? annotation* statement_do_done?
+
+definition_operator ::= OPERATOR operation_name arg_def_cortege ((RIGHT_ARROW type) | (ASSIGN id COLON type))? annotation* statement_do_done?
+
+operation_name ::= OP1 | OP2 | OP12 | operation_sq_name
+operation_sq_name ::= SQ_OPEN SQ_CLOSE
 
 arg_def_cortege ::= PAR_OPEN (      id (COMMA id)* COLON type (ASSIGN expr)?
                              (COMMA id (COMMA id)* COLON type (ASSIGN expr)?)* COMMA?)? PAR_CLOSE
@@ -56,7 +61,8 @@ annotation ::= DOG id cortege?
 
 statement_var_def ::= LET id annotation* COLON type? assign_part?
 
-type ::= CEIL* id type_annotation*
+type ::= type1 (PIPE type1)*
+type1 ::= CEIL* id type_annotation*
 
 type_annotation ::= PERCENT id cortege?
 
@@ -75,17 +81,19 @@ private expr ::= expr_op2
 operation1 ::= OP1 | OP12
 operation2 ::= OP2 | OP12
 
-expr_dot ::= expr_single (DOT id cortege?)*
+expr_dot ::= expr_single (DOT id cortege_any?)*
 
 private expr_op1 ::= operation1? expr_dot
 private expr_single ::= expr_call | expr_const | expr_square | expr_str | expr_paren
 
-expr_call ::= id cortege?
+expr_call ::= id cortege_any?
 
 expr_paren  ::= PAR_OPEN expr PAR_CLOSE
 expr_square ::=  SQ_OPEN expr SQ_CLOSE
-private expr_const ::= NUMBER | YES | NO | NIL | STR_CONST
+private expr_const ::= NUMBER | YES | NO | STR_CONST
 
 expr_op2 ::= expr_op1 (operation2 expr_dot)*
 
-cortege ::= PAR_OPEN (expr (COMMA expr)* COMMA?)? PAR_CLOSE
+private cortege_any ::= cortege | cortege_sq
+cortege    ::= PAR_OPEN (expr (COMMA expr)* COMMA?)? PAR_CLOSE
+cortege_sq ::=  SQ_OPEN (expr (COMMA expr)* COMMA?)?  SQ_CLOSE

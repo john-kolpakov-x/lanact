@@ -8,9 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface ActType extends PsiElement {
 
   @NotNull
-  ActId getId();
-
-  @NotNull
-  List<ActTypeAnnotation> getTypeAnnotationList();
+  List<ActType1> getType1List();
 
 }
