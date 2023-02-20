@@ -727,6 +727,120 @@ public class ActParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // expr_dot (COLON2 (type1 | PAR_OPEN type PAR_CLOSE))*
+  public static boolean expr_convert_dot(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "expr_convert_dot")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, EXPR_CONVERT_DOT, "<expr convert dot>");
+    r = expr_dot(b, l + 1);
+    r = r && expr_convert_dot_1(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // (COLON2 (type1 | PAR_OPEN type PAR_CLOSE))*
+  private static boolean expr_convert_dot_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "expr_convert_dot_1")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!expr_convert_dot_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "expr_convert_dot_1", c)) break;
+    }
+    return true;
+  }
+
+  // COLON2 (type1 | PAR_OPEN type PAR_CLOSE)
+  private static boolean expr_convert_dot_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "expr_convert_dot_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, COLON2);
+    r = r && expr_convert_dot_1_0_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // type1 | PAR_OPEN type PAR_CLOSE
+  private static boolean expr_convert_dot_1_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "expr_convert_dot_1_0_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = type1(b, l + 1);
+    if (!r) r = expr_convert_dot_1_0_1_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // PAR_OPEN type PAR_CLOSE
+  private static boolean expr_convert_dot_1_0_1_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "expr_convert_dot_1_0_1_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, PAR_OPEN);
+    r = r && type(b, l + 1);
+    r = r && consumeToken(b, PAR_CLOSE);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // expr_op1 (COLON2 (type1 | PAR_OPEN type PAR_CLOSE))*
+  public static boolean expr_convert_op1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "expr_convert_op1")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, EXPR_CONVERT_OP_1, "<expr convert op 1>");
+    r = expr_op1(b, l + 1);
+    r = r && expr_convert_op1_1(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // (COLON2 (type1 | PAR_OPEN type PAR_CLOSE))*
+  private static boolean expr_convert_op1_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "expr_convert_op1_1")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!expr_convert_op1_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "expr_convert_op1_1", c)) break;
+    }
+    return true;
+  }
+
+  // COLON2 (type1 | PAR_OPEN type PAR_CLOSE)
+  private static boolean expr_convert_op1_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "expr_convert_op1_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, COLON2);
+    r = r && expr_convert_op1_1_0_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // type1 | PAR_OPEN type PAR_CLOSE
+  private static boolean expr_convert_op1_1_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "expr_convert_op1_1_0_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = type1(b, l + 1);
+    if (!r) r = expr_convert_op1_1_0_1_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // PAR_OPEN type PAR_CLOSE
+  private static boolean expr_convert_op1_1_0_1_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "expr_convert_op1_1_0_1_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, PAR_OPEN);
+    r = r && type(b, l + 1);
+    r = r && consumeToken(b, PAR_CLOSE);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // expr_single (DOT id cortege_any?)*
   public static boolean expr_dot(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "expr_dot")) return false;
@@ -788,18 +902,18 @@ public class ActParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // expr_op1 (operation2 expr_dot)*
+  // expr_convert_op1 (operation2 expr_convert_dot)*
   public static boolean expr_op2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "expr_op2")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, EXPR_OP_2, "<expr op 2>");
-    r = expr_op1(b, l + 1);
+    r = expr_convert_op1(b, l + 1);
     r = r && expr_op2_1(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  // (operation2 expr_dot)*
+  // (operation2 expr_convert_dot)*
   private static boolean expr_op2_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "expr_op2_1")) return false;
     while (true) {
@@ -810,13 +924,13 @@ public class ActParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // operation2 expr_dot
+  // operation2 expr_convert_dot
   private static boolean expr_op2_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "expr_op2_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = operation2(b, l + 1);
-    r = r && expr_dot(b, l + 1);
+    r = r && expr_convert_dot(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }

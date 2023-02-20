@@ -5,15 +5,15 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface ActExprOp2 extends PsiElement {
+public interface ActExprConvertDot extends PsiElement {
 
   @NotNull
-  List<ActExprConvertDot> getExprConvertDotList();
+  ActExprDot getExprDot();
 
   @NotNull
-  ActExprConvertOp1 getExprConvertOp1();
+  List<ActType> getTypeList();
 
   @NotNull
-  List<ActOperation2> getOperation2List();
+  List<ActType1> getType1List();
 
 }

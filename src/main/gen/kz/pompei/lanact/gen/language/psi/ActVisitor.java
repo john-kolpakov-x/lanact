@@ -55,6 +55,14 @@ public class ActVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitExprConvertDot(@NotNull ActExprConvertDot o) {
+    visitPsiElement(o);
+  }
+
+  public void visitExprConvertOp1(@NotNull ActExprConvertOp1 o) {
+    visitPsiElement(o);
+  }
+
   public void visitExprDot(@NotNull ActExprDot o) {
     visitPsiElement(o);
   }

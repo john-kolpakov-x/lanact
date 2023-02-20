@@ -22,6 +22,8 @@ public interface ActTokenTypes {
   IElementType DEFINITION_OPERATOR = new ActElementType("DEFINITION_OPERATOR");
   IElementType DO_DONE_LAST = new ActElementType("DO_DONE_LAST");
   IElementType EXPR_CALL = new ActElementType("EXPR_CALL");
+  IElementType EXPR_CONVERT_DOT = new ActElementType("EXPR_CONVERT_DOT");
+  IElementType EXPR_CONVERT_OP_1 = new ActElementType("EXPR_CONVERT_OP_1");
   IElementType EXPR_DOT = new ActElementType("EXPR_DOT");
   IElementType EXPR_OP_2 = new ActElementType("EXPR_OP_2");
   IElementType EXPR_PAREN = new ActElementType("EXPR_PAREN");
@@ -51,6 +53,7 @@ public interface ActTokenTypes {
   IElementType CEIL = new ActTokenType("CEIL");
   IElementType CLASS = new ActTokenType("CLASS");
   IElementType COLON = new ActTokenType("COLON");
+  IElementType COLON2 = new ActTokenType("COLON2");
   IElementType COMMA = new ActTokenType("COMMA");
   IElementType COMMENT = new ActTokenType("COMMENT");
   IElementType DO = new ActTokenType("DO");
@@ -125,6 +128,12 @@ public interface ActTokenTypes {
       }
       else if (type == EXPR_CALL) {
         return new ActExprCallImpl(node);
+      }
+      else if (type == EXPR_CONVERT_DOT) {
+        return new ActExprConvertDotImpl(node);
+      }
+      else if (type == EXPR_CONVERT_OP_1) {
+        return new ActExprConvertOp1Impl(node);
       }
       else if (type == EXPR_DOT) {
         return new ActExprDotImpl(node);
