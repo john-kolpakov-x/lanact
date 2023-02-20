@@ -33,7 +33,7 @@ definition_fun ::= FUN id arg_def_cortege? ((RIGHT_ARROW type) | (ASSIGN id COLO
 
 definition_operator ::= OPERATOR operation_name arg_def_cortege ((RIGHT_ARROW type) | (ASSIGN id COLON type))? annotation* statement_do_done?
 
-operation_name ::= OP1 | OP2 | OP12 | operation_sq_name
+operation_name ::= OP1 | OP2 | OP12 | operation_sq_name | PIPE
 operation_sq_name ::= SQ_OPEN SQ_CLOSE
 
 arg_def_cortege ::= PAR_OPEN (      id (COMMA id)* COLON type (ASSIGN expr)?
@@ -79,11 +79,14 @@ statement_else ::= ELSE statements
 private expr ::= expr_op2
 
 operation1 ::= OP1 | OP12
-operation2 ::= OP2 | OP12
+operation2 ::= OP2 | OP12 | PIPE
 
 expr_dot ::= expr_single (DOT id cortege_any?)*
 
-private expr_op1 ::= operation1? expr_dot
+//expr_convert_op1 ::= expr_op1 COLON2 (type1 | PAR_OPEN type PAR_CLOSE)
+//expr_convert_dot ::= expr_dot COLON2 (type1 | PAR_OPEN type PAR_CLOSE)
+
+private expr_op1    ::= operation1? expr_dot
 private expr_single ::= expr_call | expr_const | expr_square | expr_str | expr_paren
 
 expr_call ::= id cortege_any?

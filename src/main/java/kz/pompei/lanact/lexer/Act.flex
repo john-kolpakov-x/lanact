@@ -124,6 +124,7 @@ STR_CONST="{" ( [^\{\}]*  [^\\] )? "}"
 <YYINITIAL> ">-"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
 <YYINITIAL> "??"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
 
+<YYINITIAL> "||"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
 <YYINITIAL> "|"                                             { yybegin(YYINITIAL); return ActTokenTypes.PIPE;        }
 
 //<YYINITIAL> "?"                                             { yybegin(YYINITIAL); return ActTokenTypes.QUESTION;   }

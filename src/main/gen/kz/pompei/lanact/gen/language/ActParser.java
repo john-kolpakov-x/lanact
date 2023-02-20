@@ -946,20 +946,20 @@ public class ActParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // OP2 | OP12
+  // OP2 | OP12 | PIPE
   public static boolean operation2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "operation2")) return false;
-    if (!nextTokenIs(b, "<operation 2>", OP12, OP2)) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, OPERATION_2, "<operation 2>");
     r = consumeToken(b, OP2);
     if (!r) r = consumeToken(b, OP12);
+    if (!r) r = consumeToken(b, PIPE);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
   /* ********************************************************** */
-  // OP1 | OP2 | OP12 | operation_sq_name
+  // OP1 | OP2 | OP12 | operation_sq_name | PIPE
   public static boolean operation_name(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "operation_name")) return false;
     boolean r;
@@ -968,6 +968,7 @@ public class ActParser implements PsiParser, LightPsiParser {
     if (!r) r = consumeToken(b, OP2);
     if (!r) r = consumeToken(b, OP12);
     if (!r) r = operation_sq_name(b, l + 1);
+    if (!r) r = consumeToken(b, PIPE);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
