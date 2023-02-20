@@ -29,8 +29,8 @@ public class ActExprParenImpl extends ASTWrapperPsiElement implements ActExprPar
 
   @Override
   @NotNull
-  public ActExprOp2 getExprOp2() {
-    return findNotNullChildByClass(ActExprOp2.class);
+  public ActExprSelect getExprSelect() {
+    return findNotNullChildByClass(ActExprSelect.class);
   }
 
 }

@@ -11,6 +11,6 @@ public interface ActStatementExpr extends PsiElement {
   ActAssignPart getAssignPart();
 
   @NotNull
-  ActExprOp2 getExprOp2();
+  ActExprSelect getExprSelect();
 
 }

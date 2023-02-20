@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface ActStatementRet extends PsiElement {
 
   @Nullable
-  ActExprOp2 getExprOp2();
+  ActExprSelect getExprSelect();
 
 }

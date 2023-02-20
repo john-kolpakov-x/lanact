@@ -76,9 +76,9 @@ statement_else_if ::= ELSIF expr statements
 
 statement_else ::= ELSE statements
 
-private expr ::= expr_op2
+private expr ::= expr_select
 
-//expr_select ::= expr_op2 QUESTION expr_op2 COLON expr_op2
+expr_select ::= expr_op2 (QUESTION expr_op2 COLON expr_op2)*
 
 operation1 ::= OP1 | OP12
 operation2 ::= OP2 | OP12 | PIPE

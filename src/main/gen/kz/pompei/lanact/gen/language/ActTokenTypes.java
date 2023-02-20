@@ -27,6 +27,7 @@ public interface ActTokenTypes {
   IElementType EXPR_DOT = new ActElementType("EXPR_DOT");
   IElementType EXPR_OP_2 = new ActElementType("EXPR_OP_2");
   IElementType EXPR_PAREN = new ActElementType("EXPR_PAREN");
+  IElementType EXPR_SELECT = new ActElementType("EXPR_SELECT");
   IElementType EXPR_SQUARE = new ActElementType("EXPR_SQUARE");
   IElementType EXPR_STR = new ActElementType("EXPR_STR");
   IElementType ID = new ActElementType("ID");
@@ -79,6 +80,7 @@ public interface ActTokenTypes {
   IElementType PAR_OPEN = new ActTokenType("PAR_OPEN");
   IElementType PERCENT = new ActTokenType("PERCENT");
   IElementType PIPE = new ActTokenType("PIPE");
+  IElementType QUESTION = new ActTokenType("QUESTION");
   IElementType RET = new ActTokenType("RET");
   IElementType RIGHT_ARROW = new ActTokenType("RIGHT_ARROW");
   IElementType SQ_CLOSE = new ActTokenType("SQ_CLOSE");
@@ -143,6 +145,9 @@ public interface ActTokenTypes {
       }
       else if (type == EXPR_PAREN) {
         return new ActExprParenImpl(node);
+      }
+      else if (type == EXPR_SELECT) {
+        return new ActExprSelectImpl(node);
       }
       else if (type == EXPR_SQUARE) {
         return new ActExprSquareImpl(node);

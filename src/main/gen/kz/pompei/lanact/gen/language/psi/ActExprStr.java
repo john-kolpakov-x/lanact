@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface ActExprStr extends PsiElement {
 
   @NotNull
-  List<ActExprOp2> getExprOp2List();
+  List<ActExprSelect> getExprSelectList();
 
 }

@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface ActCortegeSq extends PsiElement {
 
   @NotNull
-  List<ActExprOp2> getExprOp2List();
+  List<ActExprSelect> getExprSelectList();
 
 }

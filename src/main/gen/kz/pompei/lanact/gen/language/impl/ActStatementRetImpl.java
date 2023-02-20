@@ -29,8 +29,8 @@ public class ActStatementRetImpl extends ASTWrapperPsiElement implements ActStat
 
   @Override
   @Nullable
-  public ActExprOp2 getExprOp2() {
-    return findChildByClass(ActExprOp2.class);
+  public ActExprSelect getExprSelect() {
+    return findChildByClass(ActExprSelect.class);
   }
 
 }

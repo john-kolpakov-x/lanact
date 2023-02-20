@@ -29,8 +29,8 @@ public class ActPartImportImpl extends ASTWrapperPsiElement implements ActPartIm
 
   @Override
   @NotNull
-  public ActExprOp2 getExprOp2() {
-    return findNotNullChildByClass(ActExprOp2.class);
+  public ActExprSelect getExprSelect() {
+    return findNotNullChildByClass(ActExprSelect.class);
   }
 
   @Override

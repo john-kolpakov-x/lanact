@@ -8,7 +8,7 @@ import com.intellij.psi.PsiElement;
 public interface ActArgDefCortege extends PsiElement {
 
   @NotNull
-  List<ActExprOp2> getExprOp2List();
+  List<ActExprSelect> getExprSelectList();
 
   @NotNull
   List<ActId> getIdList();

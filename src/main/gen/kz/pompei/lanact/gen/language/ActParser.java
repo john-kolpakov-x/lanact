@@ -689,9 +689,9 @@ public class ActParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // expr_op2
+  // expr_select
   static boolean expr(PsiBuilder b, int l) {
-    return expr_op2(b, l + 1);
+    return expr_select(b, l + 1);
   }
 
   /* ********************************************************** */
@@ -946,6 +946,42 @@ public class ActParser implements PsiParser, LightPsiParser {
     r = r && expr(b, l + 1);
     r = r && consumeToken(b, PAR_CLOSE);
     exit_section_(b, m, EXPR_PAREN, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // expr_op2 (QUESTION expr_op2 COLON expr_op2)*
+  public static boolean expr_select(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "expr_select")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, EXPR_SELECT, "<expr select>");
+    r = expr_op2(b, l + 1);
+    r = r && expr_select_1(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // (QUESTION expr_op2 COLON expr_op2)*
+  private static boolean expr_select_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "expr_select_1")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!expr_select_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "expr_select_1", c)) break;
+    }
+    return true;
+  }
+
+  // QUESTION expr_op2 COLON expr_op2
+  private static boolean expr_select_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "expr_select_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, QUESTION);
+    r = r && expr_op2(b, l + 1);
+    r = r && consumeToken(b, COLON);
+    r = r && expr_op2(b, l + 1);
+    exit_section_(b, m, null, r);
     return r;
   }
 

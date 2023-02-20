@@ -8,7 +8,7 @@ import com.intellij.psi.PsiElement;
 public interface ActPartImport extends PsiElement {
 
   @NotNull
-  ActExprOp2 getExprOp2();
+  ActExprSelect getExprSelect();
 
   @NotNull
   ActId getId();

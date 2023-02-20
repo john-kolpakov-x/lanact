@@ -11,14 +11,14 @@ import static kz.pompei.lanact.gen.language.ActTokenTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import kz.pompei.lanact.gen.language.psi.*;
 
-public class ActArgDefCortegeImpl extends ASTWrapperPsiElement implements ActArgDefCortege {
+public class ActExprSelectImpl extends ASTWrapperPsiElement implements ActExprSelect {
 
-  public ActArgDefCortegeImpl(@NotNull ASTNode node) {
+  public ActExprSelectImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull ActVisitor visitor) {
-    visitor.visitArgDefCortege(this);
+    visitor.visitExprSelect(this);
   }
 
   @Override
@@ -29,20 +29,8 @@ public class ActArgDefCortegeImpl extends ASTWrapperPsiElement implements ActArg
 
   @Override
   @NotNull
-  public List<ActExprSelect> getExprSelectList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActExprSelect.class);
-  }
-
-  @Override
-  @NotNull
-  public List<ActId> getIdList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActId.class);
-  }
-
-  @Override
-  @NotNull
-  public List<ActType> getTypeList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActType.class);
+  public List<ActExprOp2> getExprOp2List() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, ActExprOp2.class);
   }
 
 }
