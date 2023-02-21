@@ -54,18 +54,31 @@ STR_CONST="{" ( [^\{\}]*  [^\\] )? "}"
 <YYINITIAL> {END_OF_LINE_COMMENT}                           { yybegin(YYINITIAL); return ActTokenTypes.COMMENT;     }
 
 <YYINITIAL> "class"                                         { yybegin(YYINITIAL); return ActTokenTypes.CLASS;       }
+<YYINITIAL> "класс"                                         { yybegin(YYINITIAL); return ActTokenTypes.CLASS;       }
 <YYINITIAL> "interface"                                     { yybegin(YYINITIAL); return ActTokenTypes.INTERFACE;   }
+<YYINITIAL> "интерфейс"                                     { yybegin(YYINITIAL); return ActTokenTypes.INTERFACE;   }
 <YYINITIAL> "do"                                            { yybegin(YYINITIAL); return ActTokenTypes.DO;          }
+<YYINITIAL> "нач"                                           { yybegin(YYINITIAL); return ActTokenTypes.DO;          }
 <YYINITIAL> "catch"                                         { yybegin(YYINITIAL); return ActTokenTypes.CATCH;       }
+<YYINITIAL> "поймать"                                       { yybegin(YYINITIAL); return ActTokenTypes.CATCH;       }
 <YYINITIAL> "finally"                                       { yybegin(YYINITIAL); return ActTokenTypes.FINALLY;     }
+<YYINITIAL> "окончательно"                                  { yybegin(YYINITIAL); return ActTokenTypes.FINALLY;     }
 <YYINITIAL> "done"                                          { yybegin(YYINITIAL); return ActTokenTypes.DONE;        }
+<YYINITIAL> "кон"                                           { yybegin(YYINITIAL); return ActTokenTypes.DONE;        }
 <YYINITIAL> "if"                                            { yybegin(YYINITIAL); return ActTokenTypes.IF;          }
+<YYINITIAL> "если"                                          { yybegin(YYINITIAL); return ActTokenTypes.IF;          }
 <YYINITIAL> "elsif"                                         { yybegin(YYINITIAL); return ActTokenTypes.ELSIF;       }
+<YYINITIAL> "аесли"                                         { yybegin(YYINITIAL); return ActTokenTypes.ELSIF;       }
 <YYINITIAL> "else"                                          { yybegin(YYINITIAL); return ActTokenTypes.ELSE;        }
+<YYINITIAL> "иначе"                                         { yybegin(YYINITIAL); return ActTokenTypes.ELSE;        }
 <YYINITIAL> "end"                                           { yybegin(YYINITIAL); return ActTokenTypes.END;         }
+<YYINITIAL> "конец"                                         { yybegin(YYINITIAL); return ActTokenTypes.END;         }
 <YYINITIAL> "let"                                           { yybegin(YYINITIAL); return ActTokenTypes.LET;         }
+<YYINITIAL> "пусть"                                         { yybegin(YYINITIAL); return ActTokenTypes.LET;         }
 <YYINITIAL> "yes"                                           { yybegin(YYINITIAL); return ActTokenTypes.YES;         }
+<YYINITIAL> "да"                                            { yybegin(YYINITIAL); return ActTokenTypes.YES;         }
 <YYINITIAL> "no"                                            { yybegin(YYINITIAL); return ActTokenTypes.NO;          }
+<YYINITIAL> "нет"                                           { yybegin(YYINITIAL); return ActTokenTypes.NO;          }
 <YYINITIAL> "("                                             { yybegin(YYINITIAL); return ActTokenTypes.PAR_OPEN;    }
 <YYINITIAL> ")"                                             { yybegin(YYINITIAL); return ActTokenTypes.PAR_CLOSE;   }
 <YYINITIAL> "["                                             { yybegin(YYINITIAL); return ActTokenTypes.SQ_OPEN;     }
@@ -73,9 +86,13 @@ STR_CONST="{" ( [^\{\}]*  [^\\] )? "}"
 <YYINITIAL> "<-"                                            { yybegin(YYINITIAL); return ActTokenTypes.ASSIGN;      }
 <YYINITIAL> "->"                                            { yybegin(YYINITIAL); return ActTokenTypes.RIGHT_ARROW; }
 <YYINITIAL> "fun"                                           { yybegin(YYINITIAL); return ActTokenTypes.FUN;         }
+<YYINITIAL> "фун"                                           { yybegin(YYINITIAL); return ActTokenTypes.FUN;         }
 <YYINITIAL> "import"                                        { yybegin(YYINITIAL); return ActTokenTypes.IMPORT;      }
+<YYINITIAL> "импорт"                                        { yybegin(YYINITIAL); return ActTokenTypes.IMPORT;      }
 <YYINITIAL> "ret"                                           { yybegin(YYINITIAL); return ActTokenTypes.RET;         }
+<YYINITIAL> "вернуть"                                       { yybegin(YYINITIAL); return ActTokenTypes.RET;         }
 <YYINITIAL> "operator"                                      { yybegin(YYINITIAL); return ActTokenTypes.OPERATOR;    }
+<YYINITIAL> "оператор"                                      { yybegin(YYINITIAL); return ActTokenTypes.OPERATOR;    }
 
 <YYINITIAL> "@"                                             { yybegin(YYINITIAL); return ActTokenTypes.DOG;         }
 <YYINITIAL> "%"                                             { yybegin(YYINITIAL); return ActTokenTypes.PERCENT;     }
@@ -86,6 +103,7 @@ STR_CONST="{" ( [^\{\}]*  [^\\] )? "}"
 <YYINITIAL> "."                                             { yybegin(YYINITIAL); return ActTokenTypes.DOT;         }
 
 <YYINITIAL> "not"                                           { yybegin(YYINITIAL); return ActTokenTypes.OP1;         }
+<YYINITIAL> "не"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP1;         }
 
 <YYINITIAL> "**"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
 <YYINITIAL> "*"                                             { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
@@ -102,16 +120,19 @@ STR_CONST="{" ( [^\{\}]*  [^\\] )? "}"
 <YYINITIAL> "-"                                             { yybegin(YYINITIAL); return ActTokenTypes.OP12;        }
 
 <YYINITIAL> "and"                                           { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
+<YYINITIAL> "и"                                             { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
 
 <YYINITIAL> "or"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
+<YYINITIAL> "или"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
 <YYINITIAL> "xor"                                           { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
+<YYINITIAL> "или_или"                                           { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
 
 
-<YYINITIAL> "=!="                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
+<YYINITIAL> "=!="                                           { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
 <YYINITIAL> "==="                                           { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
 <YYINITIAL> "=="                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
 <YYINITIAL> "="                                             { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
-<YYINITIAL> "!=="                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
+<YYINITIAL> "!=="                                           { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
 <YYINITIAL> "!="                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
 <YYINITIAL> "<>"                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
 <YYINITIAL> "<="                                            { yybegin(YYINITIAL); return ActTokenTypes.OP2;         }
