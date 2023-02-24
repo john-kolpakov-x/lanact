@@ -97,6 +97,7 @@ STR_CONST="{" ( [^\{\}]*  [^\\] )? "}"
 <YYINITIAL> "@"                                             { yybegin(YYINITIAL); return ActTokenTypes.DOG;         }
 <YYINITIAL> "%"                                             { yybegin(YYINITIAL); return ActTokenTypes.PERCENT;     }
 <YYINITIAL> "^"                                             { yybegin(YYINITIAL); return ActTokenTypes.CEIL;        }
+<YYINITIAL> "~"                                             { yybegin(YYINITIAL); return ActTokenTypes.WAVE;        }
 
 <YYINITIAL> ","                                             { yybegin(YYINITIAL); return ActTokenTypes.COMMA;       }
 

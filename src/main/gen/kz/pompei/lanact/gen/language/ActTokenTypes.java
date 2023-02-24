@@ -89,6 +89,7 @@ public interface ActTokenTypes {
   IElementType STR_INNER = new ActTokenType("STR_INNER");
   IElementType STR_LEFT = new ActTokenType("STR_LEFT");
   IElementType STR_RIGHT = new ActTokenType("STR_RIGHT");
+  IElementType WAVE = new ActTokenType("WAVE");
   IElementType WORD = new ActTokenType("WORD");
   IElementType YES = new ActTokenType("YES");
 

@@ -1444,7 +1444,6 @@ public class ActParser implements PsiParser, LightPsiParser {
   // type1 (PIPE type1)*
   public static boolean type(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "type")) return false;
-    if (!nextTokenIs(b, "<type>", CEIL, WORD)) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, TYPE, "<type>");
     r = type1(b, l + 1);
@@ -1476,10 +1475,9 @@ public class ActParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // CEIL* id type_annotation*
+  // (CEIL | WAVE)* id type_annotation*
   public static boolean type1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "type1")) return false;
-    if (!nextTokenIs(b, "<type 1>", CEIL, WORD)) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, TYPE_1, "<type 1>");
     r = type1_0(b, l + 1);
@@ -1489,15 +1487,24 @@ public class ActParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // CEIL*
+  // (CEIL | WAVE)*
   private static boolean type1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "type1_0")) return false;
     while (true) {
       int c = current_position_(b);
-      if (!consumeToken(b, CEIL)) break;
+      if (!type1_0_0(b, l + 1)) break;
       if (!empty_element_parsed_guard_(b, "type1_0", c)) break;
     }
     return true;
+  }
+
+  // CEIL | WAVE
+  private static boolean type1_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "type1_0_0")) return false;
+    boolean r;
+    r = consumeToken(b, CEIL);
+    if (!r) r = consumeToken(b, WAVE);
+    return r;
   }
 
   // type_annotation*

@@ -76,7 +76,7 @@ annotation ::= DOG id cortege?
 statement_var_def ::= LET id annotation* COLON type? assign_part?
 
 type ::= type1 (PIPE type1)*
-type1 ::= CEIL* id type_annotation*
+type1 ::= (CEIL | WAVE)* id type_annotation*
 
 type_annotation ::= PERCENT id cortege?
 
